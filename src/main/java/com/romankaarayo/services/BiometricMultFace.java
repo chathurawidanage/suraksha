@@ -54,7 +54,8 @@ public class BiometricMultFace {
         UUID  uid = UUID.randomUUID();
 
         System.out.println();
-        Long i = Long.parseLong(uid.toString());
+        //Long i = Long.parseLong(uid.toString());
+        Long i = 20L;
 
         subject.setId(new Long(i++).toString());
         enrollTask.getSubjects().add(subject);

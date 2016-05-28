@@ -24,7 +24,7 @@ public class BiometricMultFaceTest extends TestCase {
         LibraryManager.initLibraryPath();
 
         if (Platform.isWindows()) {
-            biometricService.enrollMultiFaceImage("multi2.jpg");
+            biometricService.enrollMultiFaceImage("E:\\SDK\\suraksha\\src\\main\\resources\\images\\multi3.jpg");
         } else if (Platform.isLinux()) {
             biometricService.enrollMultiFaceImage("multi2.jpg");
         }
