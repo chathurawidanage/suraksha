@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * @author Chathura Widanage
  */
+@Entity
 @Table(name = "person")
 public class Person {
     @Id

@@ -40,4 +40,5 @@
     <!--Service Definitions-->
     <bean id="location-service" class="com.romankaarayo.services.LocationService"></bean>
     <bean id="person-service" class="com.romankaarayo.services.PersonService"></bean>
+    <bean id="comment-service" class="com.romankaarayo.services.CommentService"></bean>
 </beans>

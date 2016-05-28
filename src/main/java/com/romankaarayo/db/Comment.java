@@ -5,7 +5,7 @@ import javax.persistence.*;
 /**
  * @author Chathura Widanage
  */
-
+@Entity
 @Table(name = "comments")
 public class Comment {
     @Id
@@ -16,7 +16,7 @@ public class Comment {
     private String comment;
 
     @ManyToOne
-    @Column(name = "person_id",nullable = false)
+    @JoinColumn(name = "person_id")
     private Person person;
 
     public Person getPerson() {
