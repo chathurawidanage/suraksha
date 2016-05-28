@@ -1,77 +1,111 @@
 body {
     font-family: 'Open Sans', sans-serif;
 }
+
 #menubar {
     background-color: #02a676;
     height: 90px;
     width: 100%;
     position: absolute;
     top: 0px;
-    left:0px;
+    left: 0px;
     padding: 0px 40px;
     z-index: 2;
 }
+
 .menubutton {
-    float:right;
+    float: right;
     height: 90px;
     line-height: 90px;
-    color:white;
+    color: white;
 }
+
 .reliefcenter {
     background: url("../img/shelters.png") left no-repeat;
     width: 250px;
     padding-left: 45px;
 }
+
 .donations {
     background: url("../img/donations.png") left no-repeat;
     width: 150px;
     padding-left: 45px;
 }
+
 .rescued {
     background: url("../img/relief.png") left no-repeat;
     width: 250px;
     padding-left: 45px;
 }
+
 .clear {
-    float:none;
+    float: none;
 }
+
 #logo {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
+
 #sk-main-view {
-    float: left;
+    /*float: left;*/
     position: absolute;
-    bottom: 100px;
-    right: 30px;
+    top: 90px;
+    right: 0px;
     z-index: 99;
     text-align: right;
+    width: 100%;
+    height: 100%;
+    /*background-color: rgba(0,0,0,0.5);*/
+    /*background: linear-gradient(to right, rgba(0, 0, 0, 0) 41%, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.8) 100%);*/
+    pointer-events: none;
 }
+
+.sk-view {
+    pointer-events: auto;
+}
+
+#home {
+    margin-top: 80px;
+    margin-right: 40px;
+}
+
+#home h1 {
+    font-weight: 600;
+    color: white;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
+}
+
+#home p {
+    color: white;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
+}
+
 /* remove backdrop of the sidenav */
-md-backdrop._md-sidenav-backdrop{
-    display:none;
+md-backdrop._md-sidenav-backdrop {
+    display: none;
 }
 
 /* slide animation */
-#mapPane{
+#mapPane {
     transition: all linear 0.25s;
 }
 
-.slide_left{
+.slide_left {
     margin-left: 320px;
 }
 
-.slide_back{
+.slide_back {
     margin-left: 0;
 }
 
 .marker {
     border-radius: 50%;
-    background-color:#02a676;
+    background-color: #02a676;
     width: 50px;
-    height:50px;
-    padding:3px;
+    height: 50px;
+    padding: 3px;
     text-align: center;
     line-height: 50px;
     font-size: 24px;

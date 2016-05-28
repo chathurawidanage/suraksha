@@ -3,13 +3,17 @@
  */
 'use strict';
 
-var app = angular.module("myApp", ['ngMaterial', 'ngMap', 'ngRoute']);
+var app = angular.module("myApp", ['ngMaterial', 'ngRoute']);
 
 //-------------Routes
 app.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when("/", {
+    $routeProvider
+    .when("/", {
         templateUrl: 'home.htm',
         controller: 'home-controller'
+    }).when("/", {
+        templateUrl: 'camp.htm',
+        controller: 'camp-controller'
     });
 }]);
 //-------------End of Routes
@@ -84,14 +88,18 @@ app.service('donationService', ['$http', function ($http) {
 app.controller('ip-mainmenu-controller', sk_mainmenu_controller);
 app.controller('home-controller', sk_home_controller);
 app.controller('map-controller', sk_map_controller);
+app.controller('camp-controller', sk_camp_controller);
 //main menu controller
-function sk_mainmenu_controller($scope, $mdDialog, hellofy) {
+function sk_mainmenu_controller($scope, $mdDialog, $location, hellofy) {
     $scope.reliefCenterCount = 35;
     $scope.donationCount = 400;
     $scope.locatedPeopleCount = 200;
-    this.open = function (event) {
+    $scope.open = function (event) {
         $mdDialog.show($mdDialog.alert().title("Open").textContent("Not implemented").ok("Great!").targetEvent(event));
         hellofy.alert();
+    }
+    $scope.loadView = function (view) {
+        $location.view(view);
     }
 }
 
@@ -103,10 +111,36 @@ function sk_locator_controller($scope, locator) {
     var image = $scope.image;
     locator.uploadSearchImage(image);
 }
+function sk_camp_controller($scope, campService) {
+    $scope.showPledge = function () {
+        
+    }
+}
 
-function sk_map_controller($scope, NgMap) {
-    var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -34.397, lng: 150.644},
-        zoom: 8
+function sk_map_controller($scope,campService) {
+    campService.all().then(function(data) {
+        data.forEach(function(camp) {
+            new google.maps.Marker(
+                {
+                    position : {
+                        lat : camp.location.lat, lng : camp.location.lon
+                    },
+                    map : map,
+                    icon : getMarkerIcon(camp)
+                }
+            )
+            )
+        });
     });
+
+    function getMarkerIcon(percentage) {
+        var icon = {
+            url: "img/mapmarker.png", // url
+            size: new google.maps.Size(50, 50), // size
+            origin: new google.maps.Point(0,0), // origin
+            anchor: new google.maps.Point(25,25) // anchor
+        };
+        return icon;
+    }
+
 }
