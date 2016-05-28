@@ -6,6 +6,7 @@ package com.romankaarayo.services;
 import com.neurotec.biometrics.NMatchingSpeed;
 import com.neurotec.biometrics.client.NBiometricClient;
 import com.neurotec.licensing.NLicense;
+import com.romankaarayo.util.AppConst;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -68,7 +69,8 @@ public final class FaceTools {
 			}
 
 			//NBiometricClient client = FaceTools.getInstance().getClient();
-			client.setDatabaseConnectionToSQLite("test.db");
+//			client.setDatabaseConnectionToSQLite("test.db");
+			client.setDatabaseConnectionToSQLite(AppConst.getDbLocation());
 			client.setMatchingThreshold(36);
             /*
             100 	% 0

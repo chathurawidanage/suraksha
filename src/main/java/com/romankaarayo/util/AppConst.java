@@ -13,4 +13,11 @@ public class AppConst {
         }
         return "/opt/";
     }
+
+    public static String getDbLocation() {
+        if (Platform.isWindows()) {
+            return "E:\\SDK\\images\\test.db";
+        }
+        return "/opt/test.db";
+    }
 }
