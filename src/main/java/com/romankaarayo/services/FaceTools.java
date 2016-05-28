@@ -1,7 +1,13 @@
 package com.romankaarayo.services;
+/**
+ * @author KRV
+ */
 
+import com.neurotec.biometrics.NMatchingSpeed;
 import com.neurotec.biometrics.client.NBiometricClient;
 import com.neurotec.licensing.NLicense;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class FaceTools {
-
+	private final Logger logger = LogManager.getLogger(FaceTools.class);
 	// ===========================================================
 	// Private static fields
 	// ===========================================================
@@ -48,6 +54,34 @@ public final class FaceTools {
 		obtainedLicenses = new HashMap<String, Boolean>();
 		client = new NBiometricClient();
 		defaultClient = new NBiometricClient();
+
+		String components = "Biometrics.FaceExtraction,Biometrics.FaceMatching";
+		String additionalComponents = "Biometrics.FaceSegmentsDetection";
+		try {
+			if (!NLicense.obtainComponents("/local", 5000, components)) {
+				System.err.format("Could not obtain licenses for components: %s%n", components);
+				logger.error(String.format("Could not obtain licenses for components: %s%n", components));
+				System.exit(-1);
+			}
+			if (!NLicense.obtainComponents("/local", 5000, additionalComponents)) {
+				components += "," + additionalComponents;
+			}
+
+			NBiometricClient client = FaceTools.getInstance().getClient();
+			client.setDatabaseConnectionToSQLite("test.db");
+			client.setMatchingThreshold(36);
+            /*
+            100 	% 0
+            10 	    % 12
+            1 	    % 24
+            0.1 	% 36
+            0.01    % 48
+            0.001   % 60 */
+			client.setFacesMatchingSpeed(NMatchingSpeed.MEDIUM);
+		}catch (Exception e){
+			e.printStackTrace();
+			logger.error(e.toString());
+		}
 	}
 
 	// ===========================================================
