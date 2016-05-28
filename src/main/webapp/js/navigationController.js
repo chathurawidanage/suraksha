@@ -3,17 +3,20 @@
  */
 
 app.controller('globalController', function ($scope, $rootScope, $timeout, $mdSidenav, $log, campService) {
+    $scope.globalCtrl = this;
     $scope.sideNavLeftOpened = 'slide_back';
     $scope.toggleLeft = buildToggler('left');
     $scope.isOpenLeft = function () {
         return $mdSidenav('left').isOpen();
     };
 
-    $rootScope.$on('sk_pledge_controller:camp_focus', function (event, data) {
-        console.log("recv data " + JSON.stringify(data.camp));
-        $scope.open();
-        $scope.camp = data.camp;
-    });
+    var me = this;
+
+    this.title = "Title";
+
+    this.setNavTitle = function (title) {
+        me.title = title;
+    }
 
     $scope.close = function () {
         $scope.sideNavLeftOpened = 'slide_back';
@@ -56,7 +59,6 @@ app.controller('globalController', function ($scope, $rootScope, $timeout, $mdSi
             var context = $scope,
                 args = Array.prototype.slice.call(arguments);
             $timeout.cancel(timer);
-
             timer = $timeout(function () {
                 timer = undefined;
                 func.apply(context, args);
