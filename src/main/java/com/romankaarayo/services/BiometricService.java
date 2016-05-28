@@ -30,7 +30,7 @@ public class BiometricService {
     // ===========================================================
     public Long enrollPerson(Person person) {
 
-        Long result = enrollFromImage(person.getId(), AppConst.imageLocation+person.getImage());
+        Long result = enrollFromImage(person.getId(), AppConst.getImageLocation()+person.getImage());
         return result;
     }
 
