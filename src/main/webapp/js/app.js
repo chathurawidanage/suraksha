@@ -3,83 +3,43 @@
  */
 'use strict';
 
-var app = angular.module("myApp", ['ngMaterial','ngMap']);
+var app = angular.module("myApp", ['ngMaterial','ngMap', 'ngRoute']);
 
+//-------------Routes
+app.config(['$routeProvider', function($routeProvider) {
+    $routeProvider.when("/", {
+        templateUrl : 'home.htm',
+        controller : 'home-controller'
+    });
+}]);
+//-------------End of Routes
+
+//-------------Services
 app.service('hellofy', function() {
     this.alert = function() {
        console.log("hellofy");
     }
 });
+app.service('locator', function($http) {
+    this.sendSearchImage = function(image) {
+
+    }
+})
+//-------------End of Services
+app.controller('ip-mainmenu-controller', sk_mainmenu_controller);
+app.controller('home-controller',sk_home_controller);
+
 //main menu controller
-function ip_mainmenu_controller($mdDialog,hellofy) {
+function sk_mainmenu_controller($scope, $mdDialog, hellofy) {
+    $scope.reliefCenterCount = 35;
+    $scope.donationCount = 400;
+    $scope.locatedPeopleCount = 200;
     this.open = function(event) {
         $mdDialog.show($mdDialog.alert().title("Open").textContent("Not implemented").ok("Great!").targetEvent(event));
         hellofy.alert();
     }
-};
-app.controller("helloWorld", function($scope, $mdDialog, $mdMedia, hellofy) {
-    $scope.message = "Hello World";
-    $scope.showAlert = function(event) {
-        $mdDialog.show(
-            $mdDialog.alert()
-                .parent(angular.element(document.querySelector('#popupContainer')))
-                .clickOutsideToClose(true)
-                .title('This is an alert title')
-                .textContent('You can specify some description text in here.')
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(event)
-        );
+}
 
-    };
+function sk_home_controller($scope) {
 
-
-});
-
-app.controller('ip-mainmenu-controller', ip_mainmenu_controller);
-
-// Lasantha test
-
-app.controller('globalController', function($scope, $timeout, $mdSidenav, $log){
-    $scope.toggleLeft = buildToggler('left');
-
-    $scope.isOpenLeft = function(){
-        return $mdSidenav('left').isOpen();
-    };
-
-    function buildToggler(navID) {
-        return function() {
-            $mdSidenav(navID)
-                .toggle()
-                .then(function () {
-                    $log.debug("toggle " + navID + " is done");
-                });
-        }
-    }
-
-    /**
-     * Supplies a function that will continue to operate until the
-     * time is up.
-     */
-    function debounce(func, wait, context) {
-        var timer;
-        return function debounced() {
-            var context = $scope,
-                args = Array.prototype.slice.call(arguments);
-            $timeout.cancel(timer);
-            timer = $timeout(function() {
-                timer = undefined;
-                func.apply(context, args);
-            }, wait || 10);
-        };
-    }
-});
-
-app.controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
-    $scope.close = function () {
-        $mdSidenav('left').close()
-            .then(function () {
-                $log.debug("close RIGHT is done");
-            });
-    };
-});
+}

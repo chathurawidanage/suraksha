@@ -1,3 +1,6 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
 #menubar {
     background-color: #02a676;
     height: 90px;
@@ -6,10 +9,35 @@
     top: 0px;
     padding: 0px 40px;
 }
-
+.menubutton {
+    float:right;
+    height: 90px;
+    line-height: 90px;
+    color:white;
+}
+.reliefcenter {
+    background: url("../img/shelters.png") left no-repeat;
+    width: 250px;
+    padding-left: 45px;
+}
+.donations {
+    background: url("../img/donations.png") left no-repeat;
+    width: 150px;
+    padding-left: 45px;
+}
+.rescued {
+    background: url("../img/relief.png") left no-repeat;
+    width: 250px;
+    padding-left: 45px;
+}
+.clear {
+    float:none;
+}
 #logo {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+}
+.sk-main-view {
 
 }
