@@ -19,7 +19,6 @@ public class BiometricServiceTest extends TestCase {
     private BiometricService biometricService = new BiometricService();
 
     protected void setUp() {
-
     }
 
     @Test

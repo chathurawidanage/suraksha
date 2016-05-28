@@ -55,7 +55,7 @@ public final class FaceTools {
 		client = new NBiometricClient();
 		defaultClient = new NBiometricClient();
 
-		String components = "Biometrics.FaceExtraction,Biometrics.FaceMatching";
+		String components = "Biometrics.FaceExtraction,Biometrics.FaceMatching,Biometrics.FaceExtraction";
 		String additionalComponents = "Biometrics.FaceSegmentsDetection";
 		try {
 			if (!NLicense.obtainComponents("/local", 5000, components)) {

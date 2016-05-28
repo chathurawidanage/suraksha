@@ -164,7 +164,8 @@
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna</artifactId>
-            <version>4.2.2-Neurotec</version>
+            <version>4.2.2</version>
+            <!--<version>4.2.2-Neurotec</version>-->
         </dependency>
         <dependency>
             <groupId>com.neurotec</groupId>
