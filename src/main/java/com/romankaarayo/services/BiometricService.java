@@ -6,8 +6,6 @@ package com.romankaarayo.services;
 import com.neurotec.biometrics.*;
 import com.neurotec.biometrics.client.NBiometricClient;
 import com.neurotec.images.NImage;
-import com.neurotec.io.NBuffer;
-import com.neurotec.licensing.NLicense;
 import com.romankaarayo.db.Person;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,50 +13,65 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.List;
 
 
-public class BiometricService{
+public class BiometricService {
     private final Logger logger = LogManager.getLogger(BiometricService.class);
 
     public BiometricService() {
     }
 
-    public void enrollPerson(Person person){
-
+    // ===========================================================
+    // Public methods
+    // ===========================================================
+    public void enrollPerson(Person person) {
+        Long result = enrollFromImage(person.getId(), person.getImage());
     }
 
-    private Long enrollFromImage(Long id, String imagePath ){
+    public ArrayList<Long> matchFace(Person person) {
+         ArrayList<Long> result = matchFace(person.getImage());
+        return result;
+    }
+
+
+    // ===========================================================
+    // Private methods
+    // ===========================================================
+
+    private Long enrollFromImage(Long id, String imagePath) {
         NBiometricClient client = FaceTools.getInstance().getClient();
         NSubject subject = new NSubject();
         try {
-            NImage image =  NImage.fromFile(imagePath);
+            NImage image = NImage.fromFile(imagePath);
             NFace face = new NFace();
-                face.setImage(image);
-                subject.setId(id.toString());
-                subject.getFaces().add(face);
+            face.setImage(image);
+            subject.setId(id.toString());
+            subject.getFaces().add(face);
             NBiometricTask enrollTask = client.createTask(EnumSet.of(NBiometricOperation.ENROLL), subject);
 
             client.performTask(enrollTask);
 
             if (enrollTask.getStatus() != NBiometricStatus.OK) {
                 System.out.format("Enrollment was unsuccessful. Status: %s.\n", enrollTask.getStatus());
-                //if (enrollTask.getError() != null) throw enrollTask.getError();
+                logger.debug(String.format("Enrollment was unsuccessful. Status: %s.\n", enrollTask.getStatus()));
+                return -1L;
+            } else {
+                logger.debug("Enrollment successful");
                 return Long.parseLong(subject.getId());
             }
         } catch (IOException e) {
             e.printStackTrace();
+            logger.debug(String.format(e.toString());
             return -1L;
         }
-        return -1L;
     }
 
-    private ArrayList<Long> matchFace(String imagePath ){
+    private ArrayList<Long> matchFace(String imagePath) {
         NBiometricClient client = FaceTools.getInstance().getClient();
         NSubject probeSubject = new NSubject();
         ArrayList<Long> matchingResults = new ArrayList<>();
         try {
-            NImage image =  NImage.fromFile(imagePath);
+            NImage image = NImage.fromFile(imagePath);
 
             NFace face = new NFace();
             face.setImage(image);
