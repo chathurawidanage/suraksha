@@ -113,7 +113,7 @@ function sk_locator_controller($scope, locator) {
 }
 function sk_camp_controller($scope, campService) {
     $scope.showPledge = function () {
-        
+
     }
 }
 
@@ -129,7 +129,7 @@ function sk_map_controller($scope,campService) {
                     icon : getMarkerIcon(camp)
                 }
             )
-            )
+            
         });
     });
 
