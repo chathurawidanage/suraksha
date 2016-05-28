@@ -134,33 +134,35 @@
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna</artifactId>
-            <version>4.2.2-Neurotec</version>
+            <version>4.2.2</version>
+            <!--<version>4.2.2-Neurotec</version>-->
         </dependency>
         <dependency>
             <groupId>com.neurotec</groupId>
             <artifactId>neurotec-biometrics-client</artifactId>
             <version>6.0.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.neurotec</groupId>
-            <artifactId>neurotec-biometrics-gui</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.neurotec</groupId>
-            <artifactId>neurotec-devices</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.neurotec</groupId>
-            <artifactId>neurotec-biometrics-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.neurotec</groupId>
-            <artifactId>neurotec-biometrics-gui</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.neurotec</groupId>
-            <artifactId>neurotec-devices</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.neurotec</groupId>-->
+            <!--<artifactId>neurotec-biometrics-gui</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.neurotec</groupId>-->
+            <!--<artifactId>neurotec-devices</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.neurotec</groupId>-->
+            <!--<artifactId>neurotec-biometrics-client</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.neurotec</groupId>-->
+            <!--<artifactId>neurotec-biometrics-gui</artifactId>-->
+        <!--</dependency>-->
+            <dependency>
+                <groupId>com.neurotec</groupId>
+                <artifactId>neurotec-devices</artifactId>
+            <version>6.0.0.0</version>
+            </dependency>
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna</artifactId>
@@ -179,11 +181,6 @@
         </dependency>
         <dependency>
             <groupId>com.neurotec</groupId>
-            <artifactId>neurotec-gui</artifactId>
-            <version>6.0.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.neurotec</groupId>
             <artifactId>neurotec-media</artifactId>
             <version>6.0.0.0</version>
         </dependency>
@@ -197,11 +194,11 @@
             <artifactId>neurotec-biometrics</artifactId>
             <version>6.0.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.neurotec.samples</groupId>
-            <artifactId>samples-utils</artifactId>
-            <version>6.0.0.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.neurotec.samples</groupId>-->
+            <!--<artifactId>samples-utils</artifactId>-->
+            <!--<version>6.0.0.0</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -218,17 +215,7 @@
             </dependency>
             <dependency>
                 <groupId>com.neurotec</groupId>
-                <artifactId>neurotec-biometrics-gui</artifactId>
-                <version>6.0.0.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.neurotec</groupId>
                 <artifactId>neurotec-cluster</artifactId>
-                <version>6.0.0.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.neurotec</groupId>
-                <artifactId>neurotec-devices</artifactId>
                 <version>6.0.0.0</version>
             </dependency>
         </dependencies>

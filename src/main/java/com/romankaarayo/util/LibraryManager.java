@@ -49,6 +49,7 @@ public final class LibraryManager {
 		} else if (Platform.isMac()) {
 			path.append(MAC_OS);
 		}
+
 		return path.toString();
 	}
 }
