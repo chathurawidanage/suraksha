@@ -73,7 +73,7 @@ function sk_camp_controller($scope, campService) {
     }
 }
 
-function sk_pledge_controller($scope,campService) {
+function sk_pledge_controller($scope, $rootScope, $location, campService) {
     //campService.all().then(function(data) {
     //    data.forEach(function(camp) {
     //        new google.maps.Marker(
@@ -88,6 +88,9 @@ function sk_pledge_controller($scope,campService) {
     //
     //    });
     //});
+
+    //show the sidebar
+
     var camps = [];
     var campMarkers = [];
     for(var i = 0;i < 10;i++) {
@@ -99,8 +102,9 @@ function sk_pledge_controller($scope,campService) {
         })
     };
     var parent = this;
+
     camps.forEach(function (location) {
-        var marker = new google.maps.Marker(
+         var marker = new google.maps.Marker (
             new google.maps.Marker(
                 {
                     position: {
@@ -116,8 +120,10 @@ function sk_pledge_controller($scope,campService) {
             parent.markerClick(marker);
         });
     });
+
     this.markerClick = function (marker) {
         console.log(marker.camp);
+        $rootScope.$emit('sk_pledge_controller:camp_focus', marker);
     }
     function getMarkerIcon(percentage) {
         var icon = {

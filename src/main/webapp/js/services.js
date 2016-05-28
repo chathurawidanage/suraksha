@@ -29,7 +29,7 @@ app.factory('campService', function ($http, $q) {
                 defer.reject(response);
             });
             return defer.promise;
-        }
+        }   
     }
 });
 

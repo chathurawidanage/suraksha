@@ -2,7 +2,7 @@
  * Created by Lasantha on 28-May-16.
  */
 
-app.controller('globalController', function ($scope, $timeout, $mdSidenav, $log, campService) {
+app.controller('globalController', function ($scope, $rootScope, $timeout, $mdSidenav, $log, campService) {
     $scope.sideNavLeftOpened = 'slide_back';
     $scope.toggleLeft = buildToggler('left');
     $scope.isOpenLeft = function () {
@@ -16,8 +16,12 @@ app.controller('globalController', function ($scope, $timeout, $mdSidenav, $log,
     camp.location.lon=77.55;
     campService.create(camp).then(function (data) {
         console.log(data);
-    })
-
+    });
+    $rootScope.$on('sk_pledge_controller:camp_focus', function (event, data) {
+        console.log("recv data " + JSON.stringify(data.camp));
+        $scope.open();
+        $scope.camp = data.camp;
+    });
     $scope.close = function () {
         $scope.sideNavLeftOpened = 'slide_back';
         $mdSidenav('left').close()
