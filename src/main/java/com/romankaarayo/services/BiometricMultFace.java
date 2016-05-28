@@ -5,6 +5,7 @@ import com.neurotec.biometrics.client.NBiometricClient;
 
 import java.util.*;
 
+import com.neurotec.images.NImage;
 import com.romankaarayo.db.Person;
 import com.romankaarayo.util.AppConst;
 import com.romankaarayo.util.LibraryManager;
@@ -36,6 +37,8 @@ public class BiometricMultFace {
 
     private List<Person> enrollFromMultiImage(String imagePath) {
         NBiometricClient biometricClient = FaceTools.getInstance().getClient();
+
+        // Subject initialization
         NSubject subject = new NSubject();
         subject.setId(imagePath);
         subject.setMultipleSubjects(true);
@@ -48,6 +51,7 @@ public class BiometricMultFace {
             System.out.format("Template creation was unsuccessful. Status: %s\n.", status);
             return null;
         }
+        System.out.println("Template Creation OK");
 
         NBiometricTask enrollTask = biometricClient.createTask(EnumSet.of(NBiometricOperation.ENROLL), null);
         //// HACK
@@ -55,7 +59,7 @@ public class BiometricMultFace {
 
         System.out.println();
         //Long i = Long.parseLong(uid.toString());
-        Long i = 20L;
+        Long i = 50L;
 
         subject.setId(new Long(i++).toString());
         enrollTask.getSubjects().add(subject);
@@ -63,12 +67,13 @@ public class BiometricMultFace {
             relatedSubject.setId(new Long(i++).toString());
             enrollTask.getSubjects().add(relatedSubject);
         }
-        List<Person> persons = convertSubjectsToPersons(enrollTask.getSubjects());
+        //List<Person> persons = convertSubjectsToPersons(enrollTask.getSubjects());
+        List<Person> persons = null;
         biometricClient.performTask(enrollTask);
 
         if (enrollTask.getStatus() != NBiometricStatus.OK) {
             System.out.format("Enrollment was unsuccessful. Status: %s.\n", status);
-            return null;
+            return persons;
         }
         return persons;
     }
@@ -79,7 +84,25 @@ public class BiometricMultFace {
             for (NSubject sub : subjects) {
                 Person person = new Person();
                 person.setId(Long.parseLong(sub.getId()));
-                sub.getFaces().get(0).getImage().save(AppConst.getImageLocation() + sub.getId());
+                //sub.getFaces().get(0).getImage().save(AppConst.getImageLocation() + sub.getId()+".jpg");
+                try {
+                    for (NSubject subi : sub.getRelatedSubjects()) {
+                        NImage ni = subi.getFaces().get(0).getImage();
+                        ni.save(AppConst.getImageLocation() + sub.getId() + ".jpg");
+                    }
+                    //NImage ni = sub.getRelatedSubjects().get(0).getFaces().get(0).getImage();
+                    //ni.save(AppConst.getImageLocation() + sub.getId()+".jpg");
+                    //NImage ni = NImage.fromMemory( sub.getTemplateBuffer());
+
+                    NImage ni = sub.getFaces().get(0).getImage();
+                    ni.save(AppConst.getImageLocation() + sub.getId() + "_1" + ".jpg");
+
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+                //ni.save(AppConst.getImageLocation() + sub.getId()+".jpg");
+
+                System.out.println(sub.getId());
                 person.setImage(sub.getId());
             }
         }catch(Exception e){
