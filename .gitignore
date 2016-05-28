@@ -1,5 +1,6 @@
 .idea/
 Suraksha.iml
+/src/main/resources/Data
 target/
 /src/main/resources/libopenblas.dll
 /src/main/resources/LiveMedia.dll

@@ -20,6 +20,15 @@ app.factory('campService', function ($http, $q) {
                 defer.reject(response);
             });
             return defer.promise;
+        },
+        create: function (campObj) {
+            var defer = $q.defer();
+            $http.post("/rest/camp/", campObj).then(function (response) {
+                defer.resolve(response.data);
+            }, function (response) {
+                defer.reject(response);
+            });
+            return defer.promise;
         }
     }
 });
@@ -28,7 +37,7 @@ app.factory('personService', function ($http, $q) {
     return {
         comment: function (personId, commentStr, commentType) {
             var comment = new Object();
-            comment.person=new Object();
+            comment.person = new Object();
             comment.person.id = personId;
             comment.commentType = commentType;
             comment.comment = commentStr;

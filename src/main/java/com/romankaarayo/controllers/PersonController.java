@@ -71,7 +71,7 @@ public class PersonController extends AbstractController {
 
     /*Images*/
     @POST
-    @Path("image")
+    @Path("persist")
     @Consumes("multipart/form-data")
     @Produces("application/json")
     public Response saveByImage(FormDataMultiPart form) {
@@ -80,6 +80,19 @@ public class PersonController extends AbstractController {
             return this.sendSuccessResponse(person);
         } catch (IOException e) {
             return this.sendCustomResponse(500, "Image not uploaded");
+        }
+    }
+
+    @POST
+    @Path("match")
+    @Consumes("multipart/form-data")
+    @Produces("application/json")
+    public Response matchPerson(FormDataMultiPart form) {
+        try {
+            Iterable<Person> person = this.personService.matchPerson(form.getField("file").getValueAs(InputStream.class));
+            return this.sendSuccessResponse(person);
+        } catch (IOException e) {
+            return this.sendCustomResponse(404, "Image not uploaded");
         }
     }
 }

@@ -2,6 +2,9 @@ package com.romankaarayo.services;
 
 import com.romankaarayo.db.Person;
 import com.romankaarayo.repository.PersonRepository;
+import jersey.repackaged.com.google.common.util.concurrent.ExecutionError;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.core.Context;
@@ -15,8 +18,13 @@ import java.util.UUID;
  * @author Chathura Widanage
  */
 public class PersonService {
+    private final Logger logger = LogManager.getLogger(PersonService.class);
+
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private BiometricService biometricService;
 
     public List<Person> all() {
         List<Person> personList = new ArrayList<>();
@@ -37,13 +45,30 @@ public class PersonService {
         String fileName = saveImage(inputStream);
         Person person = new Person();
         person.setImage(fileName);
-        return personRepository.save(person);
+        Person createdPerson = personRepository.save(person);
+        try {
+            this.biometricService.enrollPerson(person);
+        } catch (Exception ex) {
+            logger.error(ex);
+        }
+        return createdPerson;
     }
 
-    private String saveImage(InputStream inputStream) throws IOException {
+    public Iterable<Person> matchPerson(InputStream inputStream) throws IOException {
+        String filName = saveImage(inputStream);
+        try {
+            List<Long> peropleIds = this.biometricService.matchFace("/opt/" + filName);
+            return this.personRepository.findAll(peropleIds);
+        } catch (Exception ex) {
+            logger.error(ex);
+            return null;
+        }
+    }
+
+    public String saveImage(InputStream inputStream) throws IOException {
         UUID uuid = UUID.randomUUID();
         String fileName = uuid.toString() + ".jpeg";
-        FileOutputStream fileOutputStream = new FileOutputStream(new File("E:\\SDK\\opt\\" + fileName));
+        FileOutputStream fileOutputStream = new FileOutputStream(new File("/opt/" + fileName));
         int read = 0;
         byte[] bytes = new byte[1024];
         while (inputStream.read(bytes) != -1) {

@@ -32,8 +32,8 @@ public class BiometricService {
         return result;
     }
 
-    public ArrayList<Long> matchFace(Person person) {
-        ArrayList<Long> result = matchFace(person.getImage());
+    public ArrayList<Long> matchFace(String imagePath) {
+        ArrayList<Long> result = matchFaceByImage(imagePath);
         return result;
     }
 
@@ -70,7 +70,7 @@ public class BiometricService {
         }
     }
 
-    private ArrayList<Long> matchFace(String imagePath) {
+    private ArrayList<Long> matchFaceByImage(String imagePath) {
         NBiometricClient client = FaceTools.getInstance().getClient();
         NSubject probeSubject = new NSubject();
         ArrayList<Long> matchingResults = new ArrayList<>();

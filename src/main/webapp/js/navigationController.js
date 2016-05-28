@@ -2,14 +2,19 @@
  * Created by Lasantha on 28-May-16.
  */
 
-app.controller('globalController', function ($scope, $timeout, $mdSidenav, $log, personService) {
+app.controller('globalController', function ($scope, $timeout, $mdSidenav, $log, campService) {
     $scope.sideNavLeftOpened = 'slide_back';
     $scope.toggleLeft = buildToggler('left');
     $scope.isOpenLeft = function () {
         return $mdSidenav('left').isOpen();
     };
 
-    personService.comment(1,"JS comment",1).then(function (data) {
+    var camp=new Object();
+    camp.name="Test camp js";
+    camp.location=new Object();
+    camp.location.lat=77.55;
+    camp.location.lon=77.55;
+    campService.create(camp).then(function (data) {
         console.log(data);
     })
 
