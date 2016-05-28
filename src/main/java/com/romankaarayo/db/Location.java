@@ -6,7 +6,7 @@ import javax.persistence.*;
  * @author Chathura Widanage
  */
 @Entity
-@Table(name = "location")
+@Table(name = "locations")
 public class Location {
     @Id
     @Column(name = "id")
