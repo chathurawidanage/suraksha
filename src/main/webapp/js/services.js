@@ -29,7 +29,7 @@ app.factory('campService', function ($http, $q) {
                 defer.reject(response);
             });
             return defer.promise;
-        }   
+        }
     }
 });
 
@@ -51,6 +51,9 @@ app.factory('personService', function ($http, $q) {
         }
     }
 })
+
+
+
 
 
 app.service('locatorService', ['$http', function ($http) {

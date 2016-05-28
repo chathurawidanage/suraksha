@@ -93,19 +93,18 @@ function sk_pledge_controller($scope, $rootScope, $location, campService) {
 
     var camps = [];
     var campMarkers = [];
-    for (var i = 0; i < 10; i++) {
+    for(var i = 0;i < 10;i++) {
         camps.push({
-            id: Math.floor(Math.random() * 70),
+            id : Math.floor(Math.random() * 70),
             lat: 6.913255 + Math.random() / 10,
             lng: 79.8643277 + Math.random() / 10,
-            name: "Location " + i
+            name : "Location " + i
         })
-    }
-    ;
+    };
     var parent = this;
 
     camps.forEach(function (location) {
-        var marker = new google.maps.Marker(
+         var marker = new google.maps.Marker (
             new google.maps.Marker(
                 {
                     position: {
@@ -117,7 +116,7 @@ function sk_pledge_controller($scope, $rootScope, $location, campService) {
             )
         );
         marker.camp = location;
-        marker.addListener('click', function () {
+        marker.addListener('click', function() {
             parent.markerClick(marker);
         });
     });
@@ -130,11 +129,12 @@ function sk_pledge_controller($scope, $rootScope, $location, campService) {
         var icon = {
             url: "img/mapmarker.png", // url
             size: new google.maps.Size(50, 50), // size
-            origin: new google.maps.Point(0, 0), // origin
-            anchor: new google.maps.Point(25, 25) // anchor
+            origin: new google.maps.Point(0,0), // origin
+            anchor: new google.maps.Point(25,25) // anchor
         };
         return icon;
     }
+
 
 
 }
