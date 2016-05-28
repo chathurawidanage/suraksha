@@ -8,10 +8,10 @@ var app = angular.module("myApp", ['ngMaterial', 'ngRoute']);
 //-------------Routes
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-        .when("/", {
-            templateUrl: 'empty.htm',
-            controller: 'home-controller'
-        }).when("/pledge", {
+    .when("/", {
+        templateUrl: 'empty.htm',
+        controller: 'home-controller'
+    }).when("/pledge", {
         templateUrl: 'pledge.htm',
         controller: 'pledge-controller'
     });
