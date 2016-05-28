@@ -15,7 +15,7 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
         </init-param>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>lk.kade.controllers</param-value>
+            <param-value>com.romankaarayo.controllers</param-value>
         </init-param>
         <init-param>
             <param-name>jersey.config.server.provider.scanning.recursive</param-name>
