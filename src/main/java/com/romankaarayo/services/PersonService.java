@@ -2,6 +2,7 @@ package com.romankaarayo.services;
 
 import com.romankaarayo.db.Person;
 import com.romankaarayo.repository.PersonRepository;
+import com.romankaarayo.util.AppConst;
 import jersey.repackaged.com.google.common.util.concurrent.ExecutionError;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,7 +58,7 @@ public class PersonService {
     public Iterable<Person> matchPerson(InputStream inputStream) throws IOException {
         String filName = saveImage(inputStream);
         try {
-            List<Long> peropleIds = this.biometricService.matchFace("/opt/" + filName);
+            List<Long> peropleIds = this.biometricService.matchFace(AppConst.imageLocation + filName);
             return this.personRepository.findAll(peropleIds);
         } catch (Exception ex) {
             logger.error(ex);
@@ -68,7 +69,7 @@ public class PersonService {
     public String saveImage(InputStream inputStream) throws IOException {
         UUID uuid = UUID.randomUUID();
         String fileName = uuid.toString() + ".jpeg";
-        FileOutputStream fileOutputStream = new FileOutputStream(new File("/opt/" + fileName));
+        FileOutputStream fileOutputStream = new FileOutputStream(new File(AppConst.imageLocation + fileName));
         int read = 0;
         byte[] bytes = new byte[1024];
         while (inputStream.read(bytes) != -1) {
