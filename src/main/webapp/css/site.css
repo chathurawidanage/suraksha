@@ -7,7 +7,9 @@ body {
     width: 100%;
     position: absolute;
     top: 0px;
+    left:0px;
     padding: 0px 40px;
+    z-index: 2;
 }
 .menubutton {
     float:right;
@@ -38,6 +40,11 @@ body {
     top: 50%;
     transform: translateY(-50%);
 }
-.sk-main-view {
-
+#sk-main-view {
+    float: left;
+    position: absolute;
+    bottom: 100px;
+    right: 30px;
+    z-index: 99;
+    text-align: right;
 }
