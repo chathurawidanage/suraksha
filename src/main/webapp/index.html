@@ -41,30 +41,6 @@
 <!--Site templates-->
 <script type="text/ng-template" id="empty.htm">
 </script>
-<script type="text/ng-template" id="pledge.htm">
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" style="margin-top: 90px;" md-component-id="left">
-        <md-toolbar class="md-theme-left">
-            <h1 class="md-toolbar-tools">{{camp.name}}</h1>
-        </md-toolbar>
-        <md-content layout-padding>
-            <form>
-                <md-input-container>
-                    <label for="testInput">Test input</label>
-                    <input type="text" id="testInput"
-                           ng-model="data" md-autofocus>
-                </md-input-container>
-            </form>
-            <md-button ng-click="close()" class="md-primary">
-                Close Sidenav Right
-            </md-button>
-        </md-content>
-    </md-sidenav>
-</script>
-<script type="text/ng-template" id="camp.htm">
-    <div id="camp">
-
-    </div>
-</script>
 <script type="text/ng-template" id="imagesearch.htm">
     <input type="file" name="file" file-model="image" multiple>
     <button class="md-raised" ng-click="uploadImage()"></button>
