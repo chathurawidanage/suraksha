@@ -1,5 +1,5 @@
 /**
- * Created by wik2kassa on 5/27/2016.
+ * @author Yasiru Kassapa
  */
 'use strict';
 
@@ -14,6 +14,9 @@ app.config(['$routeProvider', function ($routeProvider) {
         }).when("/pledge", {
         templateUrl: 'templates/pledge.html',
         controller: 'pledge-controller'
+    }).when("/find",{
+        templateUrl:'templates/imagesearch.html',
+        controller: 'imageSearchController'
     });
 }]);
 //-------------End of Routes
@@ -40,6 +43,11 @@ app.controller('home-controller', sk_home_controller);
 app.controller('camp-controller', sk_camp_controller);
 app.controller('blank-controller', sk_blank_controller);
 app.controller('pledge-controller', sk_pledge_controller);
+app.controller('pledge-controller', sk_pledge_controller);
+app.controller('imageSearchController', function (locatorService) {
+    var ctrl = this;
+    ctrl.file;
+});
 
 //main menu controller
 function sk_mainmenu_controller($scope, $mdDialog, $location) {
