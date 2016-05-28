@@ -14,7 +14,7 @@ app.factory('campService', function ($http, $q) {
         },
         requirements: function (campId) {
             var defer = $q.defer();
-            $http.get("/rest/camp/" + campId+"/requirement").then(function (response) {
+            $http.get("/rest/camp/" + campId + "/requirement").then(function (response) {
                 defer.resolve(response.data);
             }, function (response) {
                 defer.reject(response);
@@ -24,6 +24,21 @@ app.factory('campService', function ($http, $q) {
     }
 });
 
-app.factory('requirementService', function ($http, $q) {
-    return {}
+app.factory('personService', function ($http, $q) {
+    return {
+        comment: function (personId, commentStr, commentType) {
+            var comment = new Object();
+            comment.person=new Object();
+            comment.person.id = personId;
+            comment.commentType = commentType;
+            comment.comment = commentStr;
+            var defer = $q.defer();
+            $http.post("/rest/person/" + personId + "/comment", JSON.stringify(comment)).then(function (response) {
+                defer.resolve(response.data);
+            }, function (response) {
+                defer.reject(response);
+            });
+            return defer.promise;
+        }
+    }
 })

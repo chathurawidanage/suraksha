@@ -2,14 +2,14 @@
  * Created by Lasantha on 28-May-16.
  */
 
-app.controller('globalController', function ($scope, $timeout, $mdSidenav, $log, campService) {
+app.controller('globalController', function ($scope, $timeout, $mdSidenav, $log, personService) {
     $scope.sideNavLeftOpened = 'slide_back';
     $scope.toggleLeft = buildToggler('left');
     $scope.isOpenLeft = function () {
         return $mdSidenav('left').isOpen();
     };
 
-    campService.requirements(1).then(function (data) {
+    personService.comment(1,"JS comment",1).then(function (data) {
         console.log(data);
     })
 
