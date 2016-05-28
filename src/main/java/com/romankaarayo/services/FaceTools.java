@@ -71,7 +71,7 @@ public final class FaceTools {
 			//NBiometricClient client = FaceTools.getInstance().getClient();
 //			client.setDatabaseConnectionToSQLite("test.db");
 			client.setDatabaseConnectionToSQLite(AppConst.getDbLocation());
-			client.setMatchingThreshold(36);
+			client.setMatchingThreshold(24);
             /*
             100 	% 0
             10 	    % 12
