@@ -15,6 +15,7 @@
             margin: 0;
             padding: 0;
         }
+
         #map2 {
             height: 100%;
         }
@@ -38,15 +39,26 @@
 <script src="lib/jquery.min.js"></script>
 <script src="lib/jquery.fullpage.min.js"></script>
 <!--Site templates-->
-<script type="text/ng-template" id="home.htm">
-    <div id="home" class="sk-view">
-        <h1>WELCOME TO SURAKSHA</h1>
-        <p>Surakshka allows you to volunteer for relief operations, check if a loved one is safe, discovered by relief
-            staff and get in touch with them.</p>
-        <md-button class="md-raised" >Pledge Donation</md-button>
-        <md-button class="md-raised" >Locate a Person</md-button>
-        <md-button class="md-raised" ng-click="loadView('camp.htm')">Setup a Relief Center</md-button>
-    </div>
+<script type="text/ng-template" id="empty.htm">
+</script>
+<script type="text/ng-template" id="pledge.htm">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" style="margin-top: 90px;" md-component-id="left">
+        <md-toolbar class="md-theme-left">
+            <h1 class="md-toolbar-tools">Sidenav Right</h1>
+        </md-toolbar>
+        <md-content layout-padding>
+            <form>
+                <md-input-container>
+                    <label for="testInput">Test input</label>
+                    <input type="text" id="testInput"
+                           ng-model="data" md-autofocus>
+                </md-input-container>
+            </form>
+            <md-button ng-click="close()" class="md-primary">
+                Close Sidenav Right
+            </md-button>
+        </md-content>
+    </md-sidenav>
 </script>
 <script type="text/ng-template" id="camp.htm">
     <div id="camp">
@@ -55,7 +67,7 @@
 </script>
 <script type="text/ng-template" id="imagesearch.htm">
     <input type="file" name="file" file-model="image" multiple>
-    <button class="md-raised" ng-click="uploadImage()"> </button>
+    <button class="md-raised" ng-click="uploadImage()"></button>
 </script>
 <div id="menubar" ng-controller="ip-mainmenu-controller">
     <input type="button" ng-click="toggleLeft()" value="toggle test" style="position: absolute">
@@ -74,31 +86,26 @@
 </div>
 
 <div id="sk-container">
-    <div layout="column" style="z-index: 150;">
-        <md-sidenav class="md-sidenav-left md-whiteframe-z2" style="margin-top: 90px;" md-component-id="left">
-            <md-toolbar class="md-theme-left">
-                <h1 class="md-toolbar-tools">Sidenav Right</h1>
-            </md-toolbar>
-            <md-content  layout-padding>
-                <form>
-                    <md-input-container>
-                        <label for="testInput">Test input</label>
-                        <input type="text" id="testInput"
-                               ng-model="data" md-autofocus>
-                    </md-input-container>
-                </form>
-                <md-button ng-click="close()" class="md-primary">
-                    Close Sidenav Right
-                </md-button>
-            </md-content>
-        </md-sidenav>
+    <div ng-view layout="column" style="z-index: 150;">
+
     </div>
-    <div class="fp-section" id="mapPane" ng-class="sideNavLeftOpened">
-        <div ng-view id="sk-main-view">
+    <div id="sk-main-view" ng-controller="home-controller">
+        <div id="home" class="sk-view">
+            <h1>WELCOME TO SURAKSHA</h1>
+            <p>Surakshka allows you to volunteer for relief operations, check if a loved one is safe, discovered by
+                relief
+                staff and get in touch with them.</p>
+            <md-button class="md-raised">Pledge Donation</md-button>
+            <md-button class="md-raised">Locate a Person</md-button>
+            <md-button class="md-raised" ng-click="loadView('camp.htm')">Setup a Relief Center</md-button>
         </div>
     </div>
+
+    <div class="fp-section" id="mapPane" ng-class="sideNavLeftOpened">
+
+    </div>
 </div>
-<div id="map"  style="width: 100%; height: 100%;z-index: 1">
+<div id="map" style="width: 100%; height: 100%;z-index: 1">
 
 </div>
 <script>
