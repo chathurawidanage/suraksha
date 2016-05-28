@@ -3,7 +3,23 @@
  */
 'use strict';
 
-var app = angular.module("myApp", ['ngMaterial', 'ngRoute']);
+angular.module('dropzone', []).directive('dropzone', function () {
+    return function (scope, element, attrs) {
+        var config, dropzone;
+
+        config = scope[attrs.dropzone];
+
+        // create a Dropzone for the element with the given options
+        dropzone = new Dropzone(element[0], config.options);
+
+        // bind the given event handlers
+        angular.forEach(config.eventHandlers, function (handler, event) {
+            dropzone.on(event, handler);
+        });
+    };
+});
+
+var app = angular.module("myApp", ['ngMaterial', 'ngRoute', 'dropzone']);
 
 //-------------Routes
 app.config(['$routeProvider', function ($routeProvider) {
@@ -14,8 +30,8 @@ app.config(['$routeProvider', function ($routeProvider) {
         }).when("/pledge", {
         templateUrl: 'templates/pledge.html',
         controller: 'pledgeController'
-    }).when("/find",{
-        templateUrl:'templates/imagesearch.html',
+    }).when("/find", {
+        templateUrl: 'templates/imagesearch.html',
         controller: 'imageSearchController'
     });
 }]);
@@ -49,10 +65,7 @@ app.controller('ip-mainmenu-controller', sk_mainmenu_controller);
 app.controller('home-controller', sk_home_controller);
 app.controller('camp-controller', sk_camp_controller);
 app.controller('blank-controller', sk_blank_controller);
-app.controller('imageSearchController', function (locatorService) {
-    var ctrl = this;
-    ctrl.file;
-});
+app.controller('pledge-controller', sk_pledge_controller);
 
 //main menu controller
 function sk_mainmenu_controller($scope, $mdDialog, $location) {
@@ -63,6 +76,8 @@ function sk_mainmenu_controller($scope, $mdDialog, $location) {
         $mdDialog.show($mdDialog.alert().title("Open").textContent("Not implemented").ok("Great!").targetEvent(event));
     }
     $scope.loadView = function (view) {
+        console.log("loading view");
+        $scope.$parent.open();
         $location.path(view);
     }
 }
@@ -70,6 +85,7 @@ function sk_mainmenu_controller($scope, $mdDialog, $location) {
 function sk_home_controller($scope, $location) {
     $scope.loadView = function (view) {
         console.log("buttons");
+        $scope.$parent.open();
         $location.path(view);
     };
 }

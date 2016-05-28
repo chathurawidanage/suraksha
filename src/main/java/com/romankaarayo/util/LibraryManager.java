@@ -45,7 +45,7 @@ public final class LibraryManager {
 		if (Platform.isWindows()) {
 				path.append("E:\\SDK\\Neurotec_Biometric_6_0_SDK_Trial\\Bin\\Win64_x64");
 		} else if (Platform.isLinux()) {
-			path.append("/usr/lib");
+			path.append("/media/softwares/temp/Neurotec_Biometric_6_0_SDK_Trial/Lib/Linux_x86_64");
 		} else if (Platform.isMac()) {
 			path.append(MAC_OS);
 		}
