@@ -67,7 +67,7 @@ public final class FaceTools {
 				components += "," + additionalComponents;
 			}
 
-			NBiometricClient client = FaceTools.getInstance().getClient();
+			//NBiometricClient client = FaceTools.getInstance().getClient();
 			client.setDatabaseConnectionToSQLite("test.db");
 			client.setMatchingThreshold(36);
             /*

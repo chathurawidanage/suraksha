@@ -132,8 +132,14 @@
 
         <!-- KRV -->
         <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>4.2.2-Neurotec</version>
+        </dependency>
+        <dependency>
             <groupId>com.neurotec</groupId>
             <artifactId>neurotec-biometrics-client</artifactId>
+            <version>6.0.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.neurotec</groupId>

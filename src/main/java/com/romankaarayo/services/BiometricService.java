@@ -6,6 +6,7 @@ package com.romankaarayo.services;
 import com.neurotec.biometrics.*;
 import com.neurotec.biometrics.client.NBiometricClient;
 import com.neurotec.images.NImage;
+import com.neurotec.samples.util.LibraryManager;
 import com.romankaarayo.db.Person;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,17 +20,20 @@ public class BiometricService {
     private final Logger logger = LogManager.getLogger(BiometricService.class);
 
     public BiometricService() {
+        LibraryManager.initLibraryPath();
     }
 
     // ===========================================================
     // Public methods
     // ===========================================================
-    public void enrollPerson(Person person) {
+    public Long enrollPerson(Person person) {
+
         Long result = enrollFromImage(person.getId(), person.getImage());
+        return result;
     }
 
     public ArrayList<Long> matchFace(Person person) {
-         ArrayList<Long> result = matchFace(person.getImage());
+        ArrayList<Long> result = matchFace(person.getImage());
         return result;
     }
 
