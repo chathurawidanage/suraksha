@@ -29,7 +29,7 @@ public class BiometricServiceTest extends TestCase {
         if (Platform.isWindows()) {
             testPerson.setImage("krv.jpg");
         } else if (Platform.isLinux()) {
-            testPerson.setImage(getClass().getResource("krv.jpg").getPath());
+            testPerson.setImage("krv.jpg");
         }
 
         Long out = biometricService.enrollPerson(testPerson);

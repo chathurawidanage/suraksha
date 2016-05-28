@@ -79,7 +79,7 @@ public final class FaceTools {
             0.1 	% 36
             0.01    % 48
             0.001   % 60 */
-			client.setFacesMatchingSpeed(NMatchingSpeed.MEDIUM);
+			client.setFacesMatchingSpeed(NMatchingSpeed.LOW);
 		}catch (Exception e){
 			e.printStackTrace();
 			logger.error(e.toString());
