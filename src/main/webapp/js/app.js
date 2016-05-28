@@ -13,13 +13,20 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'home-controller'
         }).when("/pledge", {
         templateUrl: 'templates/pledge.html',
-        controller: 'pledge-controller'
+        controller: 'pledgeController'
     }).when("/find",{
         templateUrl:'templates/imagesearch.html',
         controller: 'imageSearchController'
     });
 }]);
 //-------------End of Routes
+//-------------Themes
+app.config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+        .primaryPalette('teal')
+        .accentPalette('orange');
+})
+//-------------End of Themes
 //-------------Directives
 app.directive('fileModel', ['$parse', function ($parse) {
     return {
@@ -42,8 +49,6 @@ app.controller('ip-mainmenu-controller', sk_mainmenu_controller);
 app.controller('home-controller', sk_home_controller);
 app.controller('camp-controller', sk_camp_controller);
 app.controller('blank-controller', sk_blank_controller);
-app.controller('pledge-controller', sk_pledge_controller);
-app.controller('pledge-controller', sk_pledge_controller);
 app.controller('imageSearchController', function (locatorService) {
     var ctrl = this;
     ctrl.file;
@@ -81,68 +86,3 @@ function sk_camp_controller($scope, campService) {
     }
 }
 
-function sk_pledge_controller($scope, $rootScope, $location, campService) {
-    //campService.all().then(function(data) {
-    //    data.forEach(function(camp) {
-    //        new google.maps.Marker(
-    //            {
-    //                position : {
-    //                    lat : camp.location.lat, lng : camp.location.lon
-    //                },
-    //                map : map,
-    //                icon : getMarkerIcon(camp)
-    //            }
-    //        )
-    //
-    //    });
-    //});
-
-    //show the sidebar
-
-    var camps = [];
-    var campMarkers = [];
-    for(var i = 0;i < 10;i++) {
-        camps.push({
-            id : Math.floor(Math.random() * 70),
-            lat: 6.913255 + Math.random() / 10,
-            lng: 79.8643277 + Math.random() / 10,
-            name : "Location " + i
-        })
-    };
-    var parent = this;
-
-    camps.forEach(function (location) {
-         var marker = new google.maps.Marker (
-            new google.maps.Marker(
-                {
-                    position: {
-                        lat: location.lat, lng: location.lng
-                    },
-                    map: map,
-                    icon: getMarkerIcon(location)
-                }
-            )
-        );
-        marker.camp = location;
-        marker.addListener('click', function() {
-            parent.markerClick(marker);
-        });
-    });
-
-    this.markerClick = function (marker) {
-        console.log(marker.camp);
-        $rootScope.$emit('sk_pledge_controller:camp_focus', marker);
-    }
-    function getMarkerIcon(percentage) {
-        var icon = {
-            url: "img/mapmarker.png", // url
-            size: new google.maps.Size(50, 50), // size
-            origin: new google.maps.Point(0,0), // origin
-            anchor: new google.maps.Point(25,25) // anchor
-        };
-        return icon;
-    }
-
-
-
-}
