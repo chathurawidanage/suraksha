@@ -11,11 +11,6 @@ public final class LibraryManager {
 	// ===========================================================
 	// Private static fields
 	// ===========================================================
-
-	private static final String WIN32_X86 = "E:\\SDK\\Neurotec_Biometric_6_0_SDK_Trial\\Lib\\Win32_x86";
-	private static final String WIN64_X64 = "E:\\SDK\\Neurotec_Biometric_6_0_SDK_Trial\\Lib\\Win64_x64";
-	private static final String LINUX_X86 = "E:\\SDK\\Neurotec_Biometric_6_0_SDK_Trial\\Lib\\Linux_x86";
-	private static final String LINUX_X86_64 = "E:\\SDK\\Neurotec_Biometric_6_0_SDK_Trial\\Lib\\Linux_x86_64";
 	private static final String MAC_OS = "/Library/Frameworks/";
 
 	// ===========================================================

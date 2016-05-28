@@ -37,7 +37,7 @@ public class BiometricServiceTest extends TestCase {
         }
 
         Long out = biometricService.enrollPerson(testPerson);
-
+        System.out.println(out);
         assertTrue(out != -1L);
     }
 }
