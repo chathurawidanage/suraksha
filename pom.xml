@@ -7,6 +7,18 @@
     <groupId>com.romankaarayo</groupId>
     <artifactId>suraksha</artifactId>
     <version>0.0.1</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <repositories>
         <repository>
             <id>snapshot-repository.java.net</id>
@@ -88,11 +100,12 @@
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-common</artifactId>
             <version>${jersy-spring-version}</version>
-        </dependency><dependency>
-        <groupId>org.glassfish.jersey.core</groupId>
-        <artifactId>jersey-server</artifactId>
-        <version>${jersy-spring-version}</version>
-    </dependency>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jersy-spring-version}</version>
+        </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet-core</artifactId>
@@ -108,8 +121,118 @@
             <artifactId>jersey-media-multipart</artifactId>
             <version>${jersy-spring-version}</version>
         </dependency>
-    </dependencies>
 
+        <dependency>
+            <groupId>hms</groupId>
+            <artifactId>sdp.app.api</artifactId>
+            <version>1.0.11-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/sdp.app.api-1.0.11-SNAPSHOT.jar</systemPath>
+        </dependency>
+
+        <!-- KRV -->
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>4.2.2-Neurotec</version>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-biometrics-client</artifactId>
+            <version>6.0.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-biometrics-gui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-devices</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-biometrics-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-biometrics-gui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-devices</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>4.2.2-Neurotec</version>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-core</artifactId>
+            <version>6.0.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-licensing</artifactId>
+            <version>6.0.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-gui</artifactId>
+            <version>6.0.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-media</artifactId>
+            <version>6.0.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-media-processing</artifactId>
+            <version>6.0.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-biometrics</artifactId>
+            <version>6.0.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec.samples</groupId>
+            <artifactId>samples-utils</artifactId>
+            <version>6.0.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+        </dependency>
+    </dependencies>
+    <!-- krv -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.neurotec</groupId>
+                <artifactId>neurotec-biometrics-client</artifactId>
+                <version>6.0.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.neurotec</groupId>
+                <artifactId>neurotec-biometrics-gui</artifactId>
+                <version>6.0.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.neurotec</groupId>
+                <artifactId>neurotec-cluster</artifactId>
+                <version>6.0.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.neurotec</groupId>
+                <artifactId>neurotec-devices</artifactId>
+                <version>6.0.0.0</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
     <properties>
         <kade-core>0.0.1</kade-core>
         <jersy-spring-version>2.22.2</jersy-spring-version>
