@@ -3,14 +3,36 @@
  */
 
 app.controller('globalController', function($scope, $timeout, $mdSidenav, $log){
+    $scope.sideNavLeftOpened = 'slide_back';
     $scope.toggleLeft = buildToggler('left');
 
     $scope.isOpenLeft = function(){
         return $mdSidenav('left').isOpen();
     };
 
+    $scope.close = function () {
+        $scope.sideNavLeftOpened = 'slide_back';
+        $mdSidenav('left').close()
+            .then(function () {
+                $log.debug("close RIGHT is done");
+            });
+    };
+
+    $scope.open = function () {
+        $scope.sideNavLeftOpened = 'slide_left';
+        $mdSidenav('left').open()
+            .then(function () {
+                $log.debug("open RIGHT is done");
+            });
+    };
+
     function buildToggler(navID) {
         return function() {
+            if($scope.sideNavLeftOpened=='slide_back'){
+                $scope.sideNavLeftOpened = 'slide_left';
+            }else{
+                $scope.sideNavLeftOpened = 'slide_back';
+            }
             $mdSidenav(navID)
                 .toggle()
                 .then(function () {
@@ -35,13 +57,4 @@ app.controller('globalController', function($scope, $timeout, $mdSidenav, $log){
             }, wait || 10);
         };
     }
-});
-
-app.controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
-    $scope.close = function () {
-        $mdSidenav('left').close()
-            .then(function () {
-                $log.debug("close RIGHT is done");
-            });
-    };
 });

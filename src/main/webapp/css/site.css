@@ -50,7 +50,20 @@ body {
 }
 /* remove backdrop of the sidenav */
 md-backdrop._md-sidenav-backdrop{
-    display:none
+    display:none;
+}
+
+/* slide animation */
+#mapPane{
+    transition: all linear 0.25s;
+}
+
+.slide_left{
+    margin-left: 320px;
+}
+
+.slide_back{
+    margin-left: 0;
 }
 
 .marker {
