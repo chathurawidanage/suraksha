@@ -58,7 +58,7 @@ public class PersonService {
     public Iterable<Person> matchPerson(InputStream inputStream) throws IOException {
         String filName = saveImage(inputStream);
         try {
-            List<Long> peropleIds = this.biometricService.matchFace(AppConst.imageLocation + filName);
+            List<Long> peropleIds = this.biometricService.matchFace(AppConst.getImageLocation() + filName);
             return this.personRepository.findAll(peropleIds);
         } catch (Exception ex) {
             logger.error(ex);
@@ -69,7 +69,7 @@ public class PersonService {
     public String saveImage(InputStream inputStream) throws IOException {
         UUID uuid = UUID.randomUUID();
         String fileName = uuid.toString() + ".jpeg";
-        FileOutputStream fileOutputStream = new FileOutputStream(new File(AppConst.imageLocation + fileName));
+        FileOutputStream fileOutputStream = new FileOutputStream(new File(AppConst.getImageLocation() + fileName));
         int read = 0;
         byte[] bytes = new byte[1024];
         while (inputStream.read(bytes) != -1) {

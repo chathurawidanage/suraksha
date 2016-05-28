@@ -6,14 +6,11 @@ import com.sun.jna.Platform;
  * @author Chathura Widanage
  */
 public class AppConst {
-    public static String imageLocation;//="/opt/";
-
-    static {
+    public static String getImageLocation() {
         // "static constructor"
         if (Platform.isWindows()) {
-            imageLocation =  "E:\\SDK\\suraksha\\target\\classes\\images\\";
-        } else if (Platform.isLinux()) {
-            imageLocation = "/opt";
+            return "E:\\SDK\\images\\";
         }
+        return "/opt/";
     }
 }
