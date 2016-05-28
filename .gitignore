@@ -40,3 +40,4 @@ target/
 /src/main/resources/NBiometrics.dll
 /src/main/resources/Activation/
 /test.db
+/src/main/resources/sdp.app.api-1.0.11-SNAPSHOT.jar

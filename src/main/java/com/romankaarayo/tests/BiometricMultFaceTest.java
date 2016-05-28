@@ -9,6 +9,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.net.URL;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -22,11 +23,15 @@ public class BiometricMultFaceTest extends TestCase {
     @Test
     public void testEnrollment() throws Exception {
         LibraryManager.initLibraryPath();
-
+        List<Person> persons = null ;
         if (Platform.isWindows()) {
-            biometricService.enrollMultiFaceImage("E:\\SDK\\suraksha\\src\\main\\resources\\images\\multi3.jpg");
+            persons = biometricService.enrollMultiFaceImage("E:\\SDK\\suraksha\\src\\main\\resources\\images\\multi3.jpg");
         } else if (Platform.isLinux()) {
-            biometricService.enrollMultiFaceImage("multi2.jpg");
+            persons = biometricService.enrollMultiFaceImage("multi2.jpg");
         }
+
+/*        for (Person person : persons) {
+            System.out.println(person.toString());
+        }*/
     }
 }
