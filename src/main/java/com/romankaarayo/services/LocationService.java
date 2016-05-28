@@ -20,15 +20,12 @@ public class LocationService {
 
     public List<Location> getAll() {
         List<Location> locationList = new ArrayList<>();
-        logger.info("Before repository");
-
         Iterator<Location> iterator = this.locationRepository.findAll().iterator();
-        logger.info("After repository");
         iterator.forEachRemaining(location -> locationList.add(location));
         return locationList;
     }
 
-    public void saveLocation(Location location) {
-        this.locationRepository.save(location);
+    public Location saveLocation(Location location) {
+        return this.locationRepository.save(location);
     }
 }

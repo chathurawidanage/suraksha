@@ -30,8 +30,8 @@ public class LocationController extends AbstractController {
 
     @POST
     @Consumes("application/json")
+    @Produces("application/json")
     public Response saveLocation(Location location) {
-        this.locationService.saveLocation(location);
-        return this.sendSuccessResponse(location);
+        return this.sendSuccessResponse(this.locationService.saveLocation(location));
     }
 }

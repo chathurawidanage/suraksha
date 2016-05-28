@@ -15,6 +15,18 @@ public class Comment {
     @Column(name = "comment")
     private String comment;
 
+    @ManyToOne
+    @Column(name = "person_id",nullable = false)
+    private Person person;
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
     public long getId() {
         return id;
     }
