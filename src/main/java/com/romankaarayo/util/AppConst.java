@@ -11,7 +11,7 @@ public class AppConst {
     static {
         // "static constructor"
         if (Platform.isWindows()) {
-            imageLocation =  "E:\\SDK\\images";
+            imageLocation =  "E:\\SDK\\suraksha\\target\\classes\\images\\";
         } else if (Platform.isLinux()) {
             imageLocation = "/opt";
         }

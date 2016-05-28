@@ -30,9 +30,9 @@ public class BiometricServiceTest extends TestCase {
         final URL resource = getClass().getResource("/images/krv.jpg");
         System.out.println(resource.getPath());
         if (Platform.isWindows()) {
-            testPerson.setImage("E:\\SDK\\suraksha\\target\\classes\\images\\krv.jpg");
+            testPerson.setImage("krv.jpg");
         } else if (Platform.isLinux()) {
-            testPerson.setImage(getClass().getResource("/images/krv.jpg").getPath());
+            testPerson.setImage(getClass().getResource("krv.jpg").getPath());
         }
 
         Long out = biometricService.enrollPerson(testPerson);

@@ -6,6 +6,7 @@ package com.romankaarayo.services;
 import com.neurotec.biometrics.*;
 import com.neurotec.biometrics.client.NBiometricClient;
 import com.neurotec.images.NImage;
+import com.romankaarayo.util.AppConst;
 import com.romankaarayo.util.LibraryManager;
 //import com.neurotec.samples.util.LibraryManaer;
 import com.romankaarayo.db.Person;
@@ -29,7 +30,7 @@ public class BiometricService {
     // ===========================================================
     public Long enrollPerson(Person person) {
 
-        Long result = enrollFromImage(person.getId(), "/opt/"+person.getImage());
+        Long result = enrollFromImage(person.getId(), AppConst.imageLocation+person.getImage());
         return result;
     }
 
