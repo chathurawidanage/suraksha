@@ -18,9 +18,6 @@ import com.sun.jna.Platform;
 public class BiometricServiceTest extends TestCase {
     private BiometricService biometricService = new BiometricService();
 
-    protected void setUp() {
-    }
-
     @Test
     public void testEnrollment() throws Exception {
         LibraryManager.initLibraryPath();

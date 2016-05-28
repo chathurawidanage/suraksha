@@ -25,6 +25,12 @@ public class BiometricMultFace {
     }
 
     // ===========================================================
+    // Public methods
+    // ===========================================================
+    public List<Person> enrollMultiFaceImage(String imagePath){
+        return enrollFromMultiImage(imagePath);
+    }
+    // ===========================================================
     // Private methods
     // ===========================================================
 
@@ -36,6 +42,7 @@ public class BiometricMultFace {
         NFace face = new NFace();
         face.setFileName(imagePath);
         subject.getFaces().add(face);
+
         NBiometricStatus status = biometricClient.createTemplate(subject);
         if (status != NBiometricStatus.OK) {
             System.out.format("Template creation was unsuccessful. Status: %s\n.", status);
