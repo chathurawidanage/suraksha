@@ -49,7 +49,9 @@
     </div>
 </script>
 <script type="text/ng-template" id="camp.htm">
-    <div></div>
+    <div id="camp">
+
+    </div>
 </script>
 <script type="text/ng-template" id="imagesearch.htm">
     <input type="file" name="file" file-model="image" multiple>
@@ -71,8 +73,8 @@
     </div>
 </div>
 
-<div id="fullpage sk-container">
-    <div layout="column" style="z-index: 150;" ng-cloak>
+<div id="sk-container">
+    <div layout="column" style="z-index: 150;">
         <md-sidenav class="md-sidenav-left md-whiteframe-z2" style="margin-top: 90px;" md-component-id="left">
             <md-toolbar class="md-theme-left">
                 <h1 class="md-toolbar-tools">Sidenav Right</h1>
@@ -92,29 +94,21 @@
         </md-sidenav>
     </div>
     <div class="fp-section" id="mapPane" ng-class="sideNavLeftOpened">
-        <!--<div id="overlay" style="width: 100%;height: 100%;"></div>-->
-        <div ng-controller="map-controller">
-
-        </div>
         <div ng-view id="sk-main-view">
-
         </div>
     </div>
-
-
 </div>
-<div id="map"  style="width: 100%; height: 100%">
+<div id="map"  style="width: 100%; height: 100%;z-index: 1">
 
 </div>
 <script>
     function initMap() {
         console.log("initilizing map");
         return map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -34.397, lng: 150.644},
-            zoom: 8
+            center: {lat: 6.913255, lng: 79.8643277},
+            zoom: 12
         });
     }
-
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbe_8nTA6AI5dC14yrhMhuL3_Qn3KoqKA&callback=initMap&v=3.23"
         type="text/javascript"></script>

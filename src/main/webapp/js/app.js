@@ -11,7 +11,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when("/", {
         templateUrl: 'home.htm',
         controller: 'home-controller'
-    }).when("/", {
+    }).when("/camp", {
         templateUrl: 'camp.htm',
         controller: 'camp-controller'
     });
@@ -87,7 +87,6 @@ app.service('donationService', ['$http', function ($http) {
 
 app.controller('ip-mainmenu-controller', sk_mainmenu_controller);
 app.controller('home-controller', sk_home_controller);
-app.controller('map-controller', sk_map_controller);
 app.controller('camp-controller', sk_camp_controller);
 //main menu controller
 function sk_mainmenu_controller($scope, $mdDialog, $location, hellofy) {
@@ -99,12 +98,15 @@ function sk_mainmenu_controller($scope, $mdDialog, $location, hellofy) {
         hellofy.alert();
     }
     $scope.loadView = function (view) {
-        $location.view(view);
+        $location.path(view);
     }
 }
 
-function sk_home_controller($scope) {
-
+function sk_home_controller($scope, $location) {
+    $scope.loadView = function (view) {
+        console.log("buttons");
+        $location.path(view);
+    };
 }
 
 function sk_locator_controller($scope, locator) {
