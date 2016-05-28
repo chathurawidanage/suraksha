@@ -3,17 +3,19 @@ package com.romankaarayo.util;
 import java.lang.reflect.Field;
 
 import com.sun.jna.Platform;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public final class LibraryManager {
-
+	private static final Logger logger = LogManager.getLogger(LibraryManager.class);
 	// ===========================================================
 	// Private static fields
 	// ===========================================================
 
-	private static final String WIN32_X86 = "Win32_x86";
-	private static final String WIN64_X64 = "Win64_x64";
-	private static final String LINUX_X86 = "Linux_x86";
-	private static final String LINUX_X86_64 = "Linux_x86_64";
+	private static final String WIN32_X86 = "E:\\SDK\\Neurotec_Biometric_6_0_SDK_Trial\\Lib\\Win32_x86";
+	private static final String WIN64_X64 = "E:\\SDK\\Neurotec_Biometric_6_0_SDK_Trial\\Lib\\Win64_x64";
+	private static final String LINUX_X86 = "E:\\SDK\\Neurotec_Biometric_6_0_SDK_Trial\\Lib\\Linux_x86";
+	private static final String LINUX_X86_64 = "E:\\SDK\\Neurotec_Biometric_6_0_SDK_Trial\\Lib\\Linux_x86_64";
 	private static final String MAC_OS = "/Library/Frameworks/";
 
 	// ===========================================================
@@ -22,6 +24,7 @@ public final class LibraryManager {
 
 	public static void initLibraryPath() {
 		String libraryPath = getLibraryPath();
+		logger.debug(libraryPath);
 		String jnaLibraryPath = System.getProperty("jna.library.path");
 		if (Utils.isNullOrEmpty(jnaLibraryPath)) {
 			System.setProperty("jna.library.path", libraryPath.toString());
@@ -44,28 +47,10 @@ public final class LibraryManager {
 
 	public static String getLibraryPath() {
 		StringBuilder path = new StringBuilder();
-		int index = Utils.getWorkingDirectory().lastIndexOf(Utils.FILE_SEPARATOR);
-		if (index == -1) {
-			return null;
-		}
-		String part = Utils.getWorkingDirectory().substring(0, index);
 		if (Platform.isWindows()) {
-			if (part.endsWith("Bin")) {
-				path.append(part);
-				path.append(Utils.FILE_SEPARATOR);
-				path.append(Platform.is64Bit() ? WIN64_X64 : WIN32_X86);
-			}
+				path.append("E:\\SDK\\Neurotec_Biometric_6_0_SDK_Trial\\Bin\\Win64_x64");
 		} else if (Platform.isLinux()) {
-			index = part.lastIndexOf(Utils.FILE_SEPARATOR);
-			if (index == -1) {
-				return null;
-			}
-			part = part.substring(0, index);
-			path.append(part);
-			path.append(Utils.FILE_SEPARATOR);
-			path.append("Lib");
-			path.append(Utils.FILE_SEPARATOR);
-			path.append(Platform.is64Bit() ? LINUX_X86_64 : LINUX_X86);
+			path.append("/media/softwares/temp/Neurotec_Biometric_6_0_SDK_Trial/Lib/Linux_x86_64");
 		} else if (Platform.isMac()) {
 			path.append(MAC_OS);
 		}
