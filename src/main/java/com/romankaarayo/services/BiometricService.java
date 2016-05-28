@@ -28,7 +28,7 @@ public class BiometricService {
     // ===========================================================
     public Long enrollPerson(Person person) {
 
-        Long result = enrollFromImage(person.getId(), person.getImage());
+        Long result = enrollFromImage(person.getId(), "/opt/"+person.getImage());
         return result;
     }
 
@@ -46,6 +46,7 @@ public class BiometricService {
         NBiometricClient client = FaceTools.getInstance().getClient();
         NSubject subject = new NSubject();
         try {
+            logger.info(imagePath);
             NImage image = NImage.fromFile(imagePath);
             NFace face = new NFace();
             face.setImage(image);
