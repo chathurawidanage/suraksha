@@ -78,7 +78,6 @@ app.service('donationService', ['$http', function ($http) {
     this.makeDonation = function () {
 
     }
-
 }]);
 //-------------End of Services
 
