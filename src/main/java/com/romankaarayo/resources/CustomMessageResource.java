@@ -5,6 +5,7 @@ package com.romankaarayo.resources;
  */
 public class CustomMessageResource {
     private String msg;
+    private Object data;
 
     public CustomMessageResource(String message, String... args) {
         try {
@@ -12,6 +13,14 @@ public class CustomMessageResource {
         } catch (Exception ex) {
             this.msg = message;
         }
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
     }
 
     private String processMsg(String message, String... args) throws Exception {

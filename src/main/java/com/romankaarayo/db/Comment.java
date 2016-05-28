@@ -1,5 +1,8 @@
 package com.romankaarayo.db;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.romankaarayo.db.constants.CommentType;
+
 import javax.persistence.*;
 
 /**
@@ -15,9 +18,22 @@ public class Comment {
     @Column(name = "comment")
     private String comment;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")
     private Person person;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "comment_type")
+    private CommentType commentType=CommentType.GENERAL;
+
+    public CommentType getCommentType() {
+        return commentType;
+    }
+
+    public void setCommentType(CommentType commentType) {
+        this.commentType = commentType;
+    }
 
     public Person getPerson() {
         return person;

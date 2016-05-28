@@ -23,6 +23,18 @@ public class Person {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "address")
+    private String address;
+
+    //location while at the disaster environment
+    @ManyToOne
+    @JoinColumn(name = "location")
+    private Location location;
+
+    @ManyToOne
+    @JoinColumn(name = "camp")
+    private Camp camp;
+
     @Column(name = "age")
     private int age;
 
@@ -35,6 +47,31 @@ public class Person {
 
     @OneToMany(mappedBy = "person",fetch = FetchType.EAGER,orphanRemoval = true)
     private List<Comment> comments;
+
+
+    public Camp getCamp() {
+        return camp;
+    }
+
+    public void setCamp(Camp camp) {
+        this.camp = camp;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
     public String getImage() {
         return image;
@@ -90,6 +127,19 @@ public class Person {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", sex=" + sex +
+                ", image='" + image + '\'' +
+                ", comments=" + comments +
+                '}';
     }
 }
 
