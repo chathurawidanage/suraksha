@@ -1,5 +1,7 @@
 package com.romankaarayo.db;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -12,24 +14,25 @@ public class Requirement {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name",nullable = false)
     private String name;
 
     @Column(name = "description")
     private String description;
 
     @Column(name = "required")
-    private float required;
+    private float required=0.0f;
 
     @Column(name = "pledged")
-    private float pledged;
+    private float pledged=0.0f;
 
     @Column(name = "recieved")
-    private float recieved;
+    private float recieved=0.0f;
 
     @Column(name = "type")
-    private int type;
+    private int type=0;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "camp_id", nullable = false)
     private Camp camp;

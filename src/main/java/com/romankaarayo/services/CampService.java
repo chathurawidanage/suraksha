@@ -15,7 +15,11 @@ public class CampService {
         return this.campRepository.save(camp);
     }
 
-    public Iterable<Camp> all(){
+    public Iterable<Camp> all() {
         return this.campRepository.findAll();
+    }
+
+    public Camp getById(Long id) {
+        return this.campRepository.findOne(id);
     }
 }

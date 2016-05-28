@@ -2,13 +2,16 @@
  * Created by Lasantha on 28-May-16.
  */
 
-app.controller('globalController', function($scope, $timeout, $mdSidenav, $log){
+app.controller('globalController', function ($scope, $timeout, $mdSidenav, $log, campService) {
     $scope.sideNavLeftOpened = 'slide_back';
     $scope.toggleLeft = buildToggler('left');
-
-    $scope.isOpenLeft = function(){
+    $scope.isOpenLeft = function () {
         return $mdSidenav('left').isOpen();
     };
+
+    campService.requirements(1).then(function (data) {
+        console.log(data);
+    })
 
     $scope.close = function () {
         $scope.sideNavLeftOpened = 'slide_back';
@@ -27,10 +30,10 @@ app.controller('globalController', function($scope, $timeout, $mdSidenav, $log){
     };
 
     function buildToggler(navID) {
-        return function() {
-            if($scope.sideNavLeftOpened=='slide_back'){
+        return function () {
+            if ($scope.sideNavLeftOpened == 'slide_back') {
                 $scope.sideNavLeftOpened = 'slide_left';
-            }else{
+            } else {
                 $scope.sideNavLeftOpened = 'slide_back';
             }
             $mdSidenav(navID)
@@ -51,7 +54,7 @@ app.controller('globalController', function($scope, $timeout, $mdSidenav, $log){
             var context = $scope,
                 args = Array.prototype.slice.call(arguments);
             $timeout.cancel(timer);
-            timer = $timeout(function() {
+            timer = $timeout(function () {
                 timer = undefined;
                 func.apply(context, args);
             }, wait || 10);

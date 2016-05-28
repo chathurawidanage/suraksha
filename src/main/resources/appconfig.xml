@@ -43,4 +43,5 @@
     <bean id="comment-service" class="com.romankaarayo.services.CommentService"></bean>
     <bean id="sms-service" class="com.romankaarayo.services.SmsService"></bean>
     <bean id="camp-service" class="com.romankaarayo.services.CampService"></bean>
+    <bean id="resource-service" class="com.romankaarayo.services.RequirementService"></bean>
 </beans>

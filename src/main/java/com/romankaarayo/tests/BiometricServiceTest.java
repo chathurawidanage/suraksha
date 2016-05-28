@@ -20,9 +20,10 @@ public class BiometricServiceTest extends TestCase {
         System.out.println("Test Started");
         Person testPerson = new Person();
         testPerson.setId(20);
-        final URL resource = getClass().getResource("/images/krv.jpg");
-        System.out.println(resource.getFile());
-        testPerson.setImage("E:\\SDK\\suraksha\\target\\classes\\images\\krv.jpg");
+        System.out.println(getClass().getResource("/images/krv.jpg").getPath());
+        /*final URL resource = ;
+        System.out.println(resource.getFile());*/
+        testPerson.setImage(getClass().getResource("/images/krv.jpg").getPath());
         Long out = biometricService.enrollPerson(testPerson);
         assertTrue(out != -1L);
     }
