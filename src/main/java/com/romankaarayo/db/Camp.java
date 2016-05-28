@@ -12,7 +12,7 @@ public class Camp {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location",nullable = false)
     private Location location;
 
