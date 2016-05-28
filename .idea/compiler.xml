@@ -24,8 +24,16 @@
         <processorPath useClasspath="true" />
         <module name="Suraksha" />
       </profile>
+      <profile default="false" name="Annotation profile for suraksha" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="suraksha" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="suraksha" target="1.8" />
       <module name="Suraksha" target="1.8" />
     </bytecodeTargetLevel>
   </component>

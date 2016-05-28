@@ -43,7 +43,7 @@ public class PersonService {
     private String saveImage(InputStream inputStream) throws IOException {
         UUID uuid = UUID.randomUUID();
         String fileName = uuid.toString() + ".jpeg";
-        FileOutputStream fileOutputStream = new FileOutputStream(new File("/opt/" + fileName));
+        FileOutputStream fileOutputStream = new FileOutputStream(new File("E:\\SDK\\opt\\" + fileName));
         int read = 0;
         byte[] bytes = new byte[1024];
         while (inputStream.read(bytes) != -1) {
