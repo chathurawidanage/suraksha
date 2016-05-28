@@ -51,3 +51,48 @@ app.factory('personService', function ($http, $q) {
         }
     }
 })
+
+
+app.service('locatorService', ['$http', function ($http) {
+    this.uploadSearchImage = function (image) {
+        var fd = new FormData();
+        fd.append('file', image);
+        $http.post('/person/search', fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
+            .success(function () {
+            })
+            .error(function () {
+            });
+    };
+    this.postComment = function (personid, commentType, comment) {
+        $http.post("/person/" + personid,
+            {
+                'personId': personid,
+                'commentType': commentType,
+                'comment': comment
+            }
+        );
+    };
+    this.thumbupComment = function () {
+
+    };
+    this.editComment = function () {
+
+    }
+}]);
+
+app.service('reliefCenterService', ['$http', function ($http) {
+    this.addReliefCenter = function () {
+
+    };
+    this.getReliefCenters = function () {
+
+    };
+}]);
+app.service('donationService', ['$http', function ($http) {
+    this.makeDonation = function () {
+
+    }
+}]);

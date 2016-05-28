@@ -8,12 +8,12 @@ var app = angular.module("myApp", ['ngMaterial', 'ngRoute']);
 //-------------Routes
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-    .when("/", {
-        templateUrl: 'home.htm',
-        controller: 'home-controller'
-    }).when("/", {
-        templateUrl: 'camp.htm',
-        controller: 'camp-controller'
+        .when("/", {
+            templateUrl: 'empty.htm',
+            controller: 'home-controller'
+        }).when("/pledge", {
+        templateUrl: 'pledge.htm',
+        controller: 'pledge-controller'
     });
 }]);
 //-------------End of Routes
@@ -34,79 +34,35 @@ app.directive('fileModel', ['$parse', function ($parse) {
     };
 }]);
 //-------------End of Directives
-//-------------Services
-app.service('hellofy', function () {
-    this.alert = function () {
-        console.log("hellofy");
-    }
-});
-app.service('locatorService', ['$http', function ($http) {
-    this.uploadSearchImage = function (image) {
-        var fd = new FormData();
-        fd.append('file', image);
-        $http.post('/person/search', fd, {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
-            })
-            .success(function () {
-            })
-            .error(function () {
-            });
-    };
-    this.postComment = function (personid, commentType, comment) {
-        $http.post("/person/" + personid,
-            {
-                'personId': personid,
-                'commentType': commentType,
-                'comment': comment
-            }
-        );
-    };
-    this.thumbupComment = function () {
-
-    };
-    this.editComment = function () {
-
-    }
-}]);
-
-app.service('reliefCenterService', ['$http', function ($http) {
-    this.addReliefCenter = function () {
-
-    };
-    this.getReliefCenters = function () {
-
-    };
-}]);
-app.service('donationService', ['$http', function ($http) {
-    this.makeDonation = function () {
-
-    }
-}]);
-//-------------End of Services
 
 app.controller('ip-mainmenu-controller', sk_mainmenu_controller);
 app.controller('home-controller', sk_home_controller);
-app.controller('map-controller', sk_map_controller);
 app.controller('camp-controller', sk_camp_controller);
+app.controller('blank-controller', sk_blank_controller);
+app.controller('pledge-controller', sk_pledge_controller);
+
 //main menu controller
-function sk_mainmenu_controller($scope, $mdDialog, $location, hellofy) {
+function sk_mainmenu_controller($scope, $mdDialog, $location) {
     $scope.reliefCenterCount = 35;
     $scope.donationCount = 400;
     $scope.locatedPeopleCount = 200;
     $scope.open = function (event) {
         $mdDialog.show($mdDialog.alert().title("Open").textContent("Not implemented").ok("Great!").targetEvent(event));
-        hellofy.alert();
     }
     $scope.loadView = function (view) {
-        $location.view(view);
+        $location.path(view);
     }
 }
 
-function sk_home_controller($scope) {
+function sk_home_controller($scope, $location) {
+    $scope.loadView = function (view) {
+        console.log("buttons");
+        $location.path(view);
+    };
+}
+function sk_blank_controller($scope) {
 
 }
-
 function sk_locator_controller($scope, locator) {
     var image = $scope.image;
     locator.uploadSearchImage(image);
@@ -117,22 +73,52 @@ function sk_camp_controller($scope, campService) {
     }
 }
 
-function sk_map_controller($scope,campService) {
-    campService.all().then(function(data) {
-        data.forEach(function(camp) {
+function sk_pledge_controller($scope,campService) {
+    //campService.all().then(function(data) {
+    //    data.forEach(function(camp) {
+    //        new google.maps.Marker(
+    //            {
+    //                position : {
+    //                    lat : camp.location.lat, lng : camp.location.lon
+    //                },
+    //                map : map,
+    //                icon : getMarkerIcon(camp)
+    //            }
+    //        )
+    //
+    //    });
+    //});
+    var camps = [];
+    var campMarkers = [];
+    for(var i = 0;i < 10;i++) {
+        camps.push({
+            id : Math.floor(Math.random() * 70),
+            lat: 6.913255 + Math.random() / 10,
+            lng: 79.8643277 + Math.random() / 10,
+            name : "Location " + i
+        })
+    };
+    var parent = this;
+    camps.forEach(function (location) {
+        var marker = new google.maps.Marker(
             new google.maps.Marker(
                 {
-                    position : {
-                        lat : camp.location.lat, lng : camp.location.lon
+                    position: {
+                        lat: location.lat, lng: location.lng
                     },
-                    map : map,
-                    icon : getMarkerIcon(camp)
+                    map: map,
+                    icon: getMarkerIcon(location)
                 }
             )
-            
+        );
+        marker.camp = location;
+        marker.addListener('click', function() {
+            parent.markerClick(marker);
         });
     });
-
+    this.markerClick = function (marker) {
+        console.log(marker.camp);
+    }
     function getMarkerIcon(percentage) {
         var icon = {
             url: "img/mapmarker.png", // url
@@ -142,5 +128,7 @@ function sk_map_controller($scope,campService) {
         };
         return icon;
     }
+
+
 
 }
