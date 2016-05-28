@@ -1,0 +1,15 @@
+#menubar {
+    background-color: #02a676;
+    height: 90px;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    padding: 0px 40px;
+}
+
+#logo {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+}
