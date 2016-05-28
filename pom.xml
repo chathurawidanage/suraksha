@@ -108,8 +108,46 @@
             <artifactId>jersey-media-multipart</artifactId>
             <version>${jersy-spring-version}</version>
         </dependency>
-    </dependencies>
 
+        <!-- KRV -->
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-biometrics-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-biometrics-gui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-devices</artifactId>
+        </dependency>
+    </dependencies>
+    <!-- krv -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.neurotec</groupId>
+                <artifactId>neurotec-biometrics-client</artifactId>
+                <version>6.0.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.neurotec</groupId>
+                <artifactId>neurotec-biometrics-gui</artifactId>
+                <version>6.0.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.neurotec</groupId>
+                <artifactId>neurotec-cluster</artifactId>
+                <version>6.0.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.neurotec</groupId>
+                <artifactId>neurotec-devices</artifactId>
+                <version>6.0.0.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <properties>
         <kade-core>0.0.1</kade-core>
         <jersy-spring-version>2.22.2</jersy-spring-version>
