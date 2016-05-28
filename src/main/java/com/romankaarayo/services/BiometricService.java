@@ -61,7 +61,7 @@ public class BiometricService {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            logger.debug(String.format(e.toString());
+            logger.debug(e.toString());
             return -1L;
         }
     }
