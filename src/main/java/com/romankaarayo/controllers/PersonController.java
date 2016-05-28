@@ -1,10 +1,13 @@
 package com.romankaarayo.controllers;
 
+import com.romankaarayo.db.Comment;
 import com.romankaarayo.db.Person;
+import com.romankaarayo.services.CommentService;
 import com.romankaarayo.services.PersonService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
@@ -18,8 +21,13 @@ import java.io.InputStream;
 @Component
 @Path("/person")
 public class PersonController extends AbstractController {
+    private final Logger logger = LogManager.getLogger(PersonController.class);
+
     @Autowired
     private PersonService personService;
+
+    @Autowired
+    private CommentService commentService;
 
     @GET
     @Produces("application/json")
@@ -35,6 +43,33 @@ public class PersonController extends AbstractController {
         return this.sendSuccessResponse(savedPerson);
     }
 
+    @GET
+    @Path("{id}")
+    @Produces("application/json")
+    public Response comments(@PathParam("id") Long id) {
+        Person person = this.personService.findById(id);
+        if (person == null) {
+            return this.sendCustomResponse(404, "Person not found");
+        }
+        logger.info(person);
+        return this.sendSuccessResponse(person);
+    }
+
+    /*Comments*/
+    @POST
+    @Path("{id}/comment")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response postComment(@PathParam("id") Long id, Comment comment) {
+        Person person = this.personService.findById(id);
+        if (person == null) {
+            return this.sendCustomResponse(404, "Person not found");
+        }
+        comment.setPerson(person);
+        return this.sendSuccessResponse(this.commentService.save(comment));
+    }
+
+    /*Images*/
     @POST
     @Path("image")
     @Consumes("multipart/form-data")
