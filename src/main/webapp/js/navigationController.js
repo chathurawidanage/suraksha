@@ -16,8 +16,23 @@ app.controller('globalController', function ($scope, $rootScope, $timeout, $mdSi
 
     this.setNavTitle = function (title) {
         me.title = title;
-    }
 
+    };
+    this.openSlide = function() {
+        $scope.sideNavLeftOpened = 'slide_left';
+        $mdSidenav('left').open()
+            .then(function () {
+                $log.debug("open RIGHT is done");
+            });
+    };
+
+    this.closeSlide = function() {
+        $scope.sideNavLeftOpened = 'slide_back';
+        $mdSidenav('left').close()
+            .then(function () {
+                $log.debug("close RIGHT is done");
+            });
+    }
     $scope.close = function () {
         $scope.sideNavLeftOpened = 'slide_back';
         $mdSidenav('left').close()

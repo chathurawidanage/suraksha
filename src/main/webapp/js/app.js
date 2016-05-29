@@ -49,10 +49,10 @@ app.controller('ip-mainmenu-controller', sk_mainmenu_controller);
 app.controller('home-controller', sk_home_controller);
 app.controller('camp-controller', sk_camp_controller);
 app.controller('blank-controller', sk_blank_controller);
-app.controller('imageSearchController', function (locatorService) {
-    var ctrl = this;
-    ctrl.file;
-});
+//app.controller('imageSearchController', function (locatorService) {
+//    var ctrl = this;
+//    ctrl.file;
+//});
 
 //main menu controller
 function sk_mainmenu_controller($scope, $mdDialog, $location) {
@@ -85,4 +85,6 @@ function sk_camp_controller($scope, campService) {
 
     }
 }
+
+
 

@@ -1,0 +1,14 @@
+<h1 class="md-subhead">{{camp.name}}</h1>
+<div ng-repeat="req in camp.requirements">
+    <span>{{req.name}} <strong>[{{req.pledged + req.offer}} Pledged / {{req.required - req.pledged - req.offer}} Needed]</strong></span>
+    <div layout>
+        <md-slider flex md-discrete ng-model="req.offer" step="1" min="0" max="{{req.required - req.pledged}}" aria-label="rating">
+        </md-slider>
+        <md-progress-circular md-mode="determinate" value="{{((req.pledged + req.offer ) / req.required )* 100}}" md-diameter="30px" style="top:10px"></md-progress-circular>
+    </div>
+</div>
+
+<div layout="row">
+    <md-button class="md-raised md-primary" ng-click="pledge($event)">Pledge</md-button>
+    <md-button class="md-raised" ng-click="close()">Cancel</md-button>
+</div>

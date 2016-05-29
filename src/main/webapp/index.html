@@ -42,16 +42,13 @@
 </div>
 
 <div id="sk-container">
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" style="margin-top: 90px;z-index: 1000" md-component-id="left">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" style="width: 450px;margin-top: 90px;z-index: 10" md-component-id="left">
         <md-toolbar class="md-theme-left">
             <h1 class="md-toolbar-tools">{{gctrl.title}}</h1>
         </md-toolbar>
         <md-content layout-padding>
             <div ng-view layout="column" style="z-index: 150;">
             </div>
-            <md-button ng-click="close()" class="md-primary">
-                Close Sidenav Right
-            </md-button>
         </md-content>
     </md-sidenav>
 </div>
@@ -115,7 +112,7 @@
 <script src="js/services.js"></script>
 <script src="js/navigationController.js"></script>
 <script src="js/controllers/imageSearchController.js"></script>
-<script src="js/controllers/PledgeController.js.js"></script>
+<script src="js/controllers/PledgeController.js"></script>
 
 <!-- Angular Material requires Angular.js Libraries -->
 <script>

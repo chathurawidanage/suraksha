@@ -1,58 +1,81 @@
 /**
  * Created by wik2kassa on 5/29/2016.
  */
-app.controller('pledgeController', function($scope, $rootScope, $location, campService) {
-    //campService.all().then(function(data) {
-    //    data.forEach(function(camp) {
-    //        new google.maps.Marker(
-    //            {
-    //                position : {
-    //                    lat : camp.location.lat, lng : camp.location.lon
-    //                },
-    //                map : map,
-    //                icon : getMarkerIcon(camp)
-    //            }
-    //        )
-    //
-    //    });
-    //});
-
-    //show the sidebar
-
+app.controller('pledgeController', function($scope, $mdDialog, $mdMedia, $location, campService) {
     var camps = [];
-    var campMarkers = [];
-    for(var i = 0;i < 10;i++) {
-        camps.push({
-            id : Math.floor(Math.random() * 70),
-            lat: 6.913255 + Math.random() / 10,
-            lng: 79.8643277 + Math.random() / 10,
-            name : "Location " + i
-        })
-    };
-    var parent = this;
 
-    camps.forEach(function (location) {
-        var marker = new google.maps.Marker (
-            new google.maps.Marker(
-                {
-                    position: {
-                        lat: location.lat, lng: location.lng
-                    },
-                    map: map,
-                    icon: getMarkerIcon(location)
-                }
-            )
-        );
-        marker.camp = location;
-        marker.addListener('click', function() {
-            parent.markerClick(marker);
+    $scope.$parent.globalCtrl.setNavTitle("Pledge Donation");
+
+    $scope.pledges = [];
+    console.log($scope.types);
+
+    var markerClick = function (marker) {
+        console.log(marker.camp.name);
+        campService.requirements(marker.camp.id).then(function(data) {
+            marker.camp.requirements =  data;
+            $scope.camp = marker.camp;
         });
+    };
+    //load all camps from server
+    campService.all().then(function(data) {
+        for(i = 0;i < data.length;i++) {
+            camp = data[i];
+            camps.push(data[i]);
+            var marker = new google.maps.Marker(
+                {
+                    position : {
+                        lat : camp.location.lat, lng : camp.location.lon
+                    },
+                    map : map,
+                    icon : getMarkerIcon(camp)
+                }
+            );
+            marker.camp = camp;
+            marker.addListener('click', markerClick);
+            console.log(JSON.stringify(camp) + " loaded from server");
+        }
+        var criticalCamp = camps[0];
+        campService.requirements(criticalCamp.id).then(function(reqs) {
+        criticalCamp.requirements = reqs;
+        console.log(JSON.stringify(reqs) + " of " +criticalCamp.id  +" loaded from server");
+        $scope.camp = criticalCamp;
+        $scope.$parent.globalCtrl.openSlide();
+        });
+
+
     });
 
-    this.markerClick = function (marker) {
-        console.log(marker.camp);
-        $rootScope.$emit('sk_pledge_controller:camp_focus', marker);
+    //show the sidebar
+    function DialogController($scope, $mdDialog) {
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        $scope.answer = function(answer) {
+            $mdDialog.hide(answer);
+        };
     }
+    $scope.pledge = function(ev) {
+        console.log(JSON.stringify($scope.camp.requirements));
+        $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'templates/thankyouDialog.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true
+            })
+            .then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+                $scope.status = 'You cancelled the dialog.';
+            });
+        $scope.$parent.globalCtrl.closeSlide();
+    };
+    console.log("pledge controller running");
+
+
     function getMarkerIcon(percentage) {
         var icon = {
             url: "img/mapmarker.png", // url
@@ -61,5 +84,17 @@ app.controller('pledgeController', function($scope, $rootScope, $location, campS
             anchor: new google.maps.Point(25,25) // anchor
         };
         return icon;
+    }
+
+    function getCritical(camps) {
+        needyCamp = camps[0];
+        neediness = 0;
+        camps.forEach(function(camp) {
+            if(neediness < camp.required) {
+                needyCamp = camp;
+                neediness = required;
+            }
+        })
+        return needyCamp;
     }
 })

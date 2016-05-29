@@ -29,6 +29,15 @@ app.factory('campService', function ($http, $q) {
                 defer.reject(response);
             });
             return defer.promise;
+        },
+        addRequirement: function(campid, req) {
+            var defer = $q.defer();
+            $http.post("/rest/camp/", req).then(function (response) {
+                defer.resolve(response.data);
+            }, function (response) {
+                defer.reject(response);
+            });
+            return defer.promise;
         }
     }
 });
