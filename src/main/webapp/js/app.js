@@ -68,7 +68,6 @@ app.controller('ip-mainmenu-controller', sk_mainmenu_controller);
 app.controller('home-controller', sk_home_controller);
 app.controller('camp-controller', sk_camp_controller);
 app.controller('blank-controller', sk_blank_controller);
-app.controller('pledge-controller', sk_pledge_controller);
 
 //main menu controller
 function sk_mainmenu_controller($scope, $mdDialog, $location) {
