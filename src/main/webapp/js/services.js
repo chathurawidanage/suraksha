@@ -31,8 +31,21 @@ app.factory('campService', function ($http, $q) {
             return defer.promise;
         },
         addRequirement: function(campid, req) {
+            //{"id":3,"name":"Paracetamol","description":"Panadol","required":150,"pledged":100,"recieved":20,
+            // "type":2,"$$hashKey":"object:26","offer":16}]
+            var data = {
+                id : req.id,
+                name : req.name,
+                description : req.description,
+                required : req.required,
+                pledged : req.pledged + req.offer,
+                recieved : req.recieved,
+                type : req.type
+            };
+
+            console.log('pushing req data: ' + JSON.stringify(data));
             var defer = $q.defer();
-            $http.post("/rest/camp/", req).then(function (response) {
+            $http.post("/rest/camp/" + campid + "/requirement/", data).then(function (response) {
                 defer.resolve(response.data);
             }, function (response) {
                 defer.reject(response);

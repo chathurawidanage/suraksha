@@ -37,6 +37,7 @@ app.controller('pledgeController', function($scope, $mdDialog, $mdMedia, $locati
         var criticalCamp = camps[0];
         campService.requirements(criticalCamp.id).then(function(reqs) {
         criticalCamp.requirements = reqs;
+
         console.log(JSON.stringify(reqs) + " of " +criticalCamp.id  +" loaded from server");
         $scope.camp = criticalCamp;
         $scope.$parent.globalCtrl.openSlide();
@@ -71,6 +72,7 @@ app.controller('pledgeController', function($scope, $mdDialog, $mdMedia, $locati
             }, function() {
                 $scope.status = 'You cancelled the dialog.';
             });
+        campService.addRequirement(camp.requirements);
         $scope.$parent.globalCtrl.closeSlide();
     };
     console.log("pledge controller running");
