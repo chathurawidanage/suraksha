@@ -1,4 +1,3 @@
-<h1 class="md-subhead">{{camp.name}}</h1>
 <div ng-repeat="req in camp.requirements">
     <span>{{req.name}} <strong>[{{req.pledged + req.offer}} Pledged / {{req.required - req.pledged - req.offer}} Needed]</strong></span>
     <div layout>

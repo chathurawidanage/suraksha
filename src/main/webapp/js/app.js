@@ -99,7 +99,7 @@ function sk_mainmenu_controller($scope, $mdDialog, $location, alertService, $htt
 }
 
 function sk_home_controller($scope, $location) {
-    $location.path("/pledge");
+    //$location.path("/pledge");
     console.log("home controller");
     $scope.loadView = function (view) {
         console.log("buttons");

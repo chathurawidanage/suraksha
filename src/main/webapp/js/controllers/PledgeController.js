@@ -1,8 +1,10 @@
 /**
  * Created by wik2kassa on 5/29/2016.
  */
-app.controller('pledgeController', function($scope, $mdDialog, $mdMedia, $location, campService) {
+app.controller('pledgeController', function ($scope, $mdDialog, $mdMedia, $location, campService) {
     var camps = [];
+
+    var scp = $scope;
 
     $scope.$parent.globalCtrl.setNavTitle("Pledge Donation");
 
@@ -12,39 +14,40 @@ app.controller('pledgeController', function($scope, $mdDialog, $mdMedia, $locati
     var markerClick = function (marker) {
         console.log(marker);
         console.log(marker.camp.name);
-        campService.requirements(marker.camp.id).then(function(data) {
-            marker.camp.requirements =  data;
+        campService.requirements(marker.camp.id).then(function (data) {
+            marker.camp.requirements = data;
             $scope.camp = marker.camp;
+            $scope.$parent.globalCtrl.setNavTitle("Pledge Donation - " + $scope.camp.name);
         });
         $scope.$parent.globalCtrl.openSlide();
     };
     //load all camps from server
-    campService.all().then(function(data) {
-        for(i = 0;i < data.length;i++) {
+    campService.all().then(function (data) {
+        for (i = 0; i < data.length; i++) {
             camp = data[i];
             camps.push(data[i]);
             var marker = new google.maps.Marker(
                 {
-                    position : {
-                        lat : camp.location.lat, lng : camp.location.lon
+                    position: {
+                        lat: camp.location.lat, lng: camp.location.lon
                     },
-                    map : map,
-                    icon : getMarkerIcon(camp)
+                    map: map,
+                    icon: getMarkerIcon(camp)
                 }
             );
             marker.camp = data[i];
-            marker.addListener('click', function() {
+            marker.addListener('click', function () {
                 markerClick(this);
             });
             console.log(JSON.stringify(camp) + " loaded from server");
         }
         var criticalCamp = camps[0];
-        campService.requirements(criticalCamp.id).then(function(reqs) {
-        criticalCamp.requirements = reqs;
+        campService.requirements(criticalCamp.id).then(function (reqs) {
+            criticalCamp.requirements = reqs;
 
-        console.log(JSON.stringify(reqs) + " of " +criticalCamp.id  +" loaded from server");
-        $scope.camp = criticalCamp;
-        $scope.$parent.globalCtrl.openSlide();
+            console.log(JSON.stringify(reqs) + " of " + criticalCamp.id + " loaded from server");
+            $scope.camp = criticalCamp;
+            $scope.$parent.globalCtrl.openSlide();
         });
 
 
@@ -52,17 +55,18 @@ app.controller('pledgeController', function($scope, $mdDialog, $mdMedia, $locati
 
     //show the sidebar
     function DialogController($scope, $mdDialog) {
-        $scope.hide = function() {
+        $scope.hide = function () {
             $mdDialog.hide();
         };
-        $scope.cancel = function() {
+        $scope.cancel = function () {
             $mdDialog.cancel();
         };
-        $scope.answer = function(answer) {
+        $scope.answer = function (answer) {
             $mdDialog.hide(answer);
         };
     }
-    $scope.pledge = function(ev) {
+
+    $scope.pledge = function (ev) {
         console.log(JSON.stringify($scope.camp.requirements));
         campService.addRequirement($scope.camp.id, $scope.camp.requirements);
         $mdDialog.show({
@@ -70,11 +74,11 @@ app.controller('pledgeController', function($scope, $mdDialog, $mdMedia, $locati
                 templateUrl: 'templates/thankyouDialog.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
-                clickOutsideToClose:true
+                clickOutsideToClose: true
             })
-            .then(function(answer) {
+            .then(function (answer) {
                 $scope.status = 'You said the information was "' + answer + '".';
-            }, function() {
+            }, function () {
                 $scope.status = 'You cancelled the dialog.';
             });
         $scope.$parent.globalCtrl.closeSlide();
@@ -86,8 +90,8 @@ app.controller('pledgeController', function($scope, $mdDialog, $mdMedia, $locati
         var icon = {
             url: "img/mapmarker.png", // url
             size: new google.maps.Size(50, 50), // size
-            origin: new google.maps.Point(0,0), // origin
-            anchor: new google.maps.Point(25,25) // anchor
+            origin: new google.maps.Point(0, 0), // origin
+            anchor: new google.maps.Point(25, 25) // anchor
         };
         return icon;
     }
@@ -95,8 +99,8 @@ app.controller('pledgeController', function($scope, $mdDialog, $mdMedia, $locati
     function getCritical(camps) {
         needyCamp = camps[0];
         neediness = 0;
-        camps.forEach(function(camp) {
-            if(neediness < camp.required) {
+        camps.forEach(function (camp) {
+            if (neediness < camp.required) {
                 needyCamp = camp;
                 neediness = required;
             }
