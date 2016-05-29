@@ -1,0 +1,23 @@
+<div ng-controller="imageResultController as ctrl">
+    <div ng-if="ctrl.hasResult">
+        <img ng-src="{{ctrl.getImageUrl()}}" width="90%">
+        <h3 style="text-align: center">{{ctrl.person.firstName}}</h3>
+        <p>{{ctrl.person.firstName}} is safe at a disaster response camp.
+            Contact camp agent +94771258452 for more details about him.</p>
+    </div>
+    <div ng-if="!ctrl.hasResult">
+        <h3 style="color:red">Unfortunately, the person you queried was not found.</h3>
+        <h4>We will let you know if we find a match in the future.</h4>
+        <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+            <div>
+                <md-input-container>
+                    <label>Phone Number</label>
+                    <input type="text" ng-model="ctrl.phone">
+                </md-input-container>
+                <md-input-container>
+                    <md-button class="md-raised">Subscribe</md-button>
+                </md-input-container>
+            </div>
+        </md-content>
+    </div>
+</div>

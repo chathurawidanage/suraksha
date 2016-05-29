@@ -79,7 +79,7 @@ app.factory('personService', function ($http, $q) {
 
 
 app.service('locatorService', ['$http', function ($http) {
-    this.results;
+    this.results=[];
 }]);
 
 app.service('reliefCenterService', ['$http', function ($http) {

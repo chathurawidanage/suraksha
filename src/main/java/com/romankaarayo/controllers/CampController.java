@@ -50,6 +50,20 @@ public class CampController extends AbstractController {
         return this.sendSuccessResponse(savedRequirement);
     }
 
+    @PUT
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Path("{id}/requirement")
+    public Response updateRequirement(@PathParam("id") Long campId, Requirement requirement) {
+        Camp camp = this.campService.getById(campId);
+        if (camp == null) {
+            return this.sendCustomResponse(404, "Camp not found");
+        }
+        requirement.setCamp(camp);
+        Requirement savedRequirement = this.requirementService.save(requirement);
+        return this.sendSuccessResponse(savedRequirement);
+    }
+
     @GET
     @Path("{id}/requirement")
     @Consumes("application/json")
