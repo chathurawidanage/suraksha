@@ -4,6 +4,7 @@ package com.romankaarayo.services;
  */
 
 import com.neurotec.biometrics.NMatchingSpeed;
+import com.neurotec.biometrics.NTemplateSize;
 import com.neurotec.biometrics.client.NBiometricClient;
 import com.neurotec.licensing.NLicense;
 import com.romankaarayo.util.AppConst;
@@ -56,7 +57,7 @@ public final class FaceTools {
 		client = new NBiometricClient();
 		defaultClient = new NBiometricClient();
 
-		String components = "Biometrics.FaceExtraction,Biometrics.FaceMatching,Biometrics.FaceDetection,Biometrics.FaceQualityAssessment,Biometrics.FaceSegmentation";
+		String components = "Biometrics.FaceExtraction,Biometrics.FaceMatching";
 		String additionalComponents = "Biometrics.FaceSegmentsDetection";
 		try {
 			if (!NLicense.obtainComponents("/local", 5000, components)) {
@@ -70,8 +71,11 @@ public final class FaceTools {
 
 			//NBiometricClient client = FaceTools.getInstance().getClient();
 //			client.setDatabaseConnectionToSQLite("test.db");
+
+			client.setFacesTemplateSize(NTemplateSize.LARGE);
+			client.setFacesConfidenceThreshold((byte)50);
 			client.setDatabaseConnectionToSQLite(AppConst.getDbLocation());
-			client.setMatchingThreshold(36);
+			client.setMatchingThreshold(60);
             /*
             100 	% 0
             10 	    % 12
@@ -79,7 +83,7 @@ public final class FaceTools {
             0.1 	% 36
             0.01    % 48
             0.001   % 60 */
-			client.setFacesMatchingSpeed(NMatchingSpeed.MEDIUM);
+			client.setFacesMatchingSpeed(NMatchingSpeed.LOW);
 		}catch (Exception e){
 			e.printStackTrace();
 			logger.error(e.toString());
