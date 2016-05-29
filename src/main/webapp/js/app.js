@@ -85,6 +85,8 @@ function sk_mainmenu_controller($scope, $mdDialog, $location) {
 }
 
 function sk_home_controller($scope, $location) {
+    $location.path("/pledge");
+    console.log("home controller");
     $scope.loadView = function (view) {
         console.log("buttons");
         $scope.$parent.open();

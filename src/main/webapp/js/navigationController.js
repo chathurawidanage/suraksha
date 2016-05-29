@@ -28,6 +28,7 @@ app.controller('globalController', function ($scope, $rootScope, $timeout, $mdSi
 
     this.closeSlide = function() {
         $scope.sideNavLeftOpened = 'slide_back';
+        console.log("closing slide...");
         $mdSidenav('left').close()
             .then(function () {
                 $log.debug("close RIGHT is done");

@@ -26,7 +26,6 @@
 
 
 <div id="menubar" ng-controller="ip-mainmenu-controller">
-    <input type="button" ng-click="toggleLeft()" value="toggle test" style="position: absolute">
     <img src="img/suraksha-logo.png" alt="Suraksha logo" id="logo">
     <div id="button_area">
         <div class="menubutton reliefcenter">
@@ -44,7 +43,12 @@
 <div id="sk-container">
     <md-sidenav class="md-sidenav-left md-whiteframe-z2" style="width: 450px;margin-top: 90px;z-index: 10" md-component-id="left">
         <md-toolbar class="md-theme-left">
-            <h1 class="md-toolbar-tools">{{gctrl.title}}</h1>
+            <div layout="row">
+                <h1 class="md-toolbar-tools">{{gctrl.title}}</h1>
+                <md-button class="md-icon-button" aria-label="More" ng-click="close()">
+                    <md-icon md-svg-icon="img/ic_close_white_24px.svg"></md-icon>
+                </md-button>
+            </div>
         </md-toolbar>
         <md-content layout-padding>
             <div ng-view layout="column" style="z-index: 150;">
@@ -61,21 +65,10 @@
         <p>Surakshka allows you to volunteer for relief operations, check if a loved one is safe, discovered by
             relief
             staff and get in touch with them.</p>
-        <md-button class="md-raised" >Pledge Donation</md-button>
+        <md-button class="md-raised md-primary" ng-click="loadView('/pledge')">Pledge Donation</md-button>
         <md-button class="md-raised" ng-click="loadView('find')">Locate a Person</md-button>
         <md-button class="md-raised" ng-click="loadView('camp.htm')">Setup a Relief Center</md-button>
         <br>
-        <md-button class="md-fab md-primary" aria-label="Use Android">
-            <md-icon md-svg-src="img/gift.svg"></md-icon>
-        </md-button>
-        <br>
-        <md-button class="md-fab md-primary" aria-label="Use Android">
-            <md-icon md-svg-src="img/heart.svg"></md-icon>
-        </md-button>
-        <br>
-        <md-button class="md-fab md-primary" aria-label="Use Android">
-            <md-icon md-svg-src="img/home.svg"></md-icon>
-        </md-button>
     </div>
 </div>
 
