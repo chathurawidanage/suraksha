@@ -100,7 +100,31 @@
             center: {lat: 6.913255, lng: 79.8643277},
             zoom: 12
         });
+// Define the LatLng coordinates for the polygon's path.
+        var triangleCoords = [
+            {lat : 6.937673677992414, lng : 79.84382629394531},
+            {lat : 6.958462567037774, lng : 79.8874282836914},
+            {lat : 6.940740948916455, lng : 79.97703552246094},
+            {lat : 6.911430655357409, lng : 79.98321533203125},
+            {lat : 6.872574675152924, lng : 79.97806549072266},
+            {lat : 6.836101698449195, lng : 79.96227264404297},
+            {lat : 6.806103144924004, lng : 79.94407653808594},
+            {lat : 6.795194114779069, lng : 79.90768432617188},
+            {lat : 6.795535025719505, lng : 79.8867416381836},
+            {lat : 6.799966845945018, lng : 79.87232208251953},
+            {lat : 6.883822786318728, lng : 79.85481262207031}
+        ];
 
+        // Construct the polygon.
+        var bermudaTriangle = new google.maps.Polygon({
+            paths: triangleCoords,
+            strokeColor: '#FF6600',
+            strokeOpacity: 0.6,
+            strokeWeight: 1,
+            fillColor: '#FF6600',
+            fillOpacity: 0.2
+        });
+        bermudaTriangle.setMap(map);
 
     }
 </script>
