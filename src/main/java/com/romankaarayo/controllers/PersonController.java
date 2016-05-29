@@ -10,8 +10,11 @@ import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.ServletContext;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -23,6 +26,9 @@ import java.io.InputStream;
 public class PersonController extends AbstractController {
     private final Logger logger = LogManager.getLogger(PersonController.class);
 
+    @Context
+    private ServletContext servletContext;
+
     @Autowired
     private PersonService personService;
 
@@ -32,6 +38,7 @@ public class PersonController extends AbstractController {
     @GET
     @Produces("application/json")
     public Response getAll() {
+        logger.info(servletContext.getRealPath("/images"));
         return this.sendSuccessResponse(this.personService.all());
     }
 
@@ -76,7 +83,10 @@ public class PersonController extends AbstractController {
     @Produces("application/json")
     public Response saveByImage(FormDataMultiPart form) {
         try {
-            Person person = this.personService.createPersonByImage(form.getField("file").getValueAs(InputStream.class));
+            Person person = this.personService.createPersonByImage(
+                    form.getField("file").getValueAs(InputStream.class),
+                    form.getField("name").getValueAs(String.class)
+            );
             return this.sendSuccessResponse(person);
         } catch (IOException e) {
             return this.sendCustomResponse(500, "Image not uploaded");

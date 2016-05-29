@@ -42,9 +42,10 @@ public class PersonService {
         return this.personRepository.findOne(id);
     }
 
-    public Person createPersonByImage(InputStream inputStream) throws IOException {
+    public Person createPersonByImage(InputStream inputStream,String name) throws IOException {
         String fileName = saveImage(inputStream);
         Person person = new Person();
+        person.setFirstName(name);
         person.setImage(fileName);
         Person createdPerson = personRepository.save(person);
         try {

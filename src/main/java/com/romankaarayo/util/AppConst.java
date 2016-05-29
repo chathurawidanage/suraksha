@@ -11,7 +11,7 @@ public class AppConst {
         if (Platform.isWindows()) {
             return "E:\\SDK\\images\\";
         }
-        return "/opt/";
+        return "/opt/images/";
     }
 
     public static String getDbLocation() {

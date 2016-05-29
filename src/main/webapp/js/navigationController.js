@@ -27,6 +27,7 @@ app.controller('globalController', function ($scope, $rootScope, $timeout, $mdSi
     };
 
     $scope.open = function () {
+        console.log("openign nav");
         $scope.sideNavLeftOpened = 'slide_left';
         $mdSidenav('left').open()
             .then(function () {

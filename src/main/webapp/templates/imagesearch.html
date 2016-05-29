@@ -1,12 +1,11 @@
 <div ng-controller="imageSearchController as ctrl" layout="column" ng-cloak class="md-inline-form">
-    <md-content layout-padding>
-        <form name="uploadForm">
-            {{ctrl.file}}
-            <md-input-container class="md-block">
-                <label>Image</label>
-                <input type="file" name="file" ng-model="ctrl.file" class="ng-hide" id="imageInput">
-                <md-button id="uploadButton" class="md-raised md-primary" ng-click="ctrl.openImageBrowser()"> Choose Files </md-button>
-            </md-input-container>
-        </form>
+    <md-content layout-padding style="overflow-x: hidden">
+        <md-input-container>
+            <div dropzone="dropzoneConfig"
+                 style="color:white;width: 80%;height: auto;min-height:200px;overflow-x: hidden;text-align: center;padding: 10px 20px 10px 10px;background-color: rgba(2,166,118,0.8);border: dotted 5px rgb(2,166,118)">
+                Drag and drop photo here or click to upload
+            </div>
+        </md-input-container>
+        <md-progress-linear md-mode="indeterminate" style="width: 80%" ng-show="ctrl.loading"></md-progress-linear>
     </md-content>
 </div>
