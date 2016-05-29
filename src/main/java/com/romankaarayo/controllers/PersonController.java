@@ -4,6 +4,7 @@ import com.romankaarayo.db.Comment;
 import com.romankaarayo.db.Person;
 import com.romankaarayo.services.CommentService;
 import com.romankaarayo.services.PersonService;
+import com.romankaarayo.util.AppConst;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
@@ -38,7 +39,6 @@ public class PersonController extends AbstractController {
     @GET
     @Produces("application/json")
     public Response getAll() {
-        logger.info(servletContext.getRealPath("/images"));
         return this.sendSuccessResponse(this.personService.all());
     }
 
@@ -82,6 +82,7 @@ public class PersonController extends AbstractController {
     @Consumes("multipart/form-data")
     @Produces("application/json")
     public Response saveByImage(FormDataMultiPart form) {
+        AppConst.setImagePath(servletContext.getRealPath("/images") + "/");
         try {
             Person person = this.personService.createPersonByImage(
                     form.getField("file").getValueAs(InputStream.class),
@@ -98,6 +99,7 @@ public class PersonController extends AbstractController {
     @Consumes("multipart/form-data")
     @Produces("application/json")
     public Response matchPerson(FormDataMultiPart form) {
+        AppConst.setImagePath(servletContext.getRealPath("/images") + "/");
         try {
             Iterable<Person> person = this.personService.matchPerson(form.getField("file").getValueAs(InputStream.class));
             return this.sendSuccessResponse(person);

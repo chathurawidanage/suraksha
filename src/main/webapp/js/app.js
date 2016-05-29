@@ -33,11 +33,14 @@ app.config(['$routeProvider', function ($routeProvider) {
     }).when("/find", {
         templateUrl: 'templates/imagesearch.html',
         controller: 'imageSearchController'
+    }).when("/find-res", {
+        templateUrl: 'templates/foundPerson.html',
+        controller: 'imageResultController'
     });
 }]);
 //-------------End of Routes
 //-------------Themes
-app.config(function($mdThemingProvider) {
+app.config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
         .primaryPalette('teal')
         .accentPalette('orange');

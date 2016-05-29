@@ -2,6 +2,7 @@
 Suraksha.iml
 /src/main/resources/Data
 target/
+src/main/webapp/images/*
 /src/main/resources/libopenblas.dll
 /src/main/resources/LiveMedia.dll
 /src/main/resources/Neurotec.Licensing.xml
