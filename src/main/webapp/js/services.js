@@ -95,6 +95,17 @@ app.service('locatorService', ['$http', function ($http) {
     this.results = [];
 }]);
 
+app.service('alertService', ['$http', function () {
+    this.notify = function (msg) {
+        console.log("alerting");
+        var notification = new Notification('Disaster Victim Alert', {
+            icon: 'https://cdn.goodwillwa.org/vendor/material-design-icons/alert/drawable-xxhdpi/ic_error_red_48dp.png',
+            body: msg,
+        });
+    }
+
+}]);
+
 app.service('reliefCenterService', ['$http', function ($http) {
     this.addReliefCenter = function () {
 

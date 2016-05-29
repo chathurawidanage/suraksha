@@ -41,7 +41,8 @@
 </div>
 
 <div id="sk-container">
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" style="width: 450px;margin-top: 90px;z-index: 10" md-component-id="left">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" style="width: 450px;margin-top: 90px;z-index: 10"
+                md-component-id="left">
         <md-toolbar class="md-theme-left">
             <div layout="row">
                 <h1 class="md-toolbar-tools">{{gctrl.title}}</h1>
@@ -95,10 +96,12 @@
 <script>
     function initMap() {
         console.log("initilizing map");
-        return map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 6.913255, lng: 79.8643277},
             zoom: 12
         });
+
+
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbe_8nTA6AI5dC14yrhMhuL3_Qn3KoqKA&callback=initMap&v=3.23"
@@ -109,6 +112,7 @@
 <script src="js/navigationController.js"></script>
 <script src="js/controllers/imageSearchController.js"></script>
 <script src="js/controllers/PledgeController.js"></script>
+<script src="js/controllers/campController.js"></script>
 
 <!-- Angular Material requires Angular.js Libraries -->
 <script>

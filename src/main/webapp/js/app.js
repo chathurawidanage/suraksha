@@ -2,6 +2,10 @@
  * @author Yasiru Kassapa
  */
 'use strict';
+document.addEventListener('DOMContentLoaded', function () {
+    if (Notification.permission !== "granted")
+        Notification.requestPermission();
+});
 
 angular.module('dropzone', []).directive('dropzone', function () {
     return function (scope, element, attrs) {
@@ -36,6 +40,9 @@ app.config(['$routeProvider', function ($routeProvider) {
     }).when("/find-res", {
         templateUrl: 'templates/foundPerson.html',
         controller: 'imageResultController'
+    }).when("/camp", {
+        templateUrl: 'templates/camp.html',
+        controller: 'campController'
     });
 }]);
 //-------------End of Routes
@@ -70,7 +77,7 @@ app.controller('camp-controller', sk_camp_controller);
 app.controller('blank-controller', sk_blank_controller);
 
 //main menu controller
-function sk_mainmenu_controller($scope, $mdDialog, $location) {
+function sk_mainmenu_controller($scope, $mdDialog, $location, alertService, $http) {
     $scope.reliefCenterCount = 35;
     $scope.donationCount = 400;
     $scope.locatedPeopleCount = 200;
@@ -82,6 +89,13 @@ function sk_mainmenu_controller($scope, $mdDialog, $location) {
         $scope.$parent.open();
         $location.path(view);
     }
+
+    setInterval(function () {
+        $http.get("/rest/sms").then(function (data) {
+            console.log(data);
+            alertService.notify(data.data.alert + "\n" + "Rough Location : " + "6.918,79.863");
+        })
+    }, 5000);
 }
 
 function sk_home_controller($scope, $location) {
