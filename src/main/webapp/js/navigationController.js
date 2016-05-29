@@ -2,7 +2,7 @@
  * Created by Lasantha on 28-May-16.
  */
 
-app.controller('globalController', function ($scope, $rootScope, $timeout, $mdSidenav, $log, campService) {
+app.controller('globalController', function ($scope, $rootScope, $timeout, $mdSidenav, $log, campService, alertService) {
     $scope.globalCtrl = this;
     $scope.sideNavLeftOpened = 'slide_back';
     $scope.toggleLeft = buildToggler('left');
@@ -16,9 +16,8 @@ app.controller('globalController', function ($scope, $rootScope, $timeout, $mdSi
 
     this.setNavTitle = function (title) {
         me.title = title;
-
     };
-    this.openSlide = function() {
+    this.openSlide = function () {
         $scope.sideNavLeftOpened = 'slide_left';
         $mdSidenav('left').open()
             .then(function () {
@@ -26,7 +25,7 @@ app.controller('globalController', function ($scope, $rootScope, $timeout, $mdSi
             });
     };
 
-    this.closeSlide = function() {
+    this.closeSlide = function () {
         $scope.sideNavLeftOpened = 'slide_back';
         console.log("closing slide...");
         $mdSidenav('left').close()
