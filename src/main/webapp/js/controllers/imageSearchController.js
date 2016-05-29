@@ -47,18 +47,37 @@ app.controller('imageSearchController', function ($scope, locatorService, $http,
     };
 });
 
-app.controller("imageResultController", function ($scope, locatorService) {
+app.controller("imageResultController", function ($scope, locatorService, personService) {
     var ctrl = this;
     ctrl.hasResult = locatorService.result.length > 0;
-    ctrl.phone="";
+    ctrl.phone = "";
     console.log(locatorService.result);
     $scope.$parent.globalCtrl.setNavTitle("Search Results");
+    ctrl.comments = [];
+    ctrl.comment;
+
+    ctrl.loadComments = function () {
+        personService.getComments(ctrl.person.id).then(function (data) {
+            ctrl.comments = data.comments;
+        })
+    }
+
     if (ctrl.hasResult) {
         ctrl.person = locatorService.result[0];
         console.log(ctrl.person);
+        ctrl.loadComments();
     }
+
+
 
     ctrl.getImageUrl = function () {
         return "images/" + ctrl.person.image;
+    }
+
+    ctrl.postComment = function () {
+        personService.comment(ctrl.person.id, ctrl.comment, 0).then(function (data) {
+            ctrl.loadComments();
+            ctrl.comment = "";
+        })
     }
 })
