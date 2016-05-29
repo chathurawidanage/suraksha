@@ -33,24 +33,31 @@ app.factory('campService', function ($http, $q) {
         addRequirement: function(campid, req) {
             //{"id":3,"name":"Paracetamol","description":"Panadol","required":150,"pledged":100,"recieved":20,
             // "type":2,"$$hashKey":"object:26","offer":16}]
-            var data = {
-                id : req.id,
-                name : req.name,
-                description : req.description,
-                required : req.required,
-                pledged : req.pledged + req.offer,
-                recieved : req.recieved,
-                type : req.type
-            };
+            console.log(req);
 
-            console.log('pushing req data: ' + JSON.stringify(data));
-            var defer = $q.defer();
-            $http.post("/rest/camp/" + campid + "/requirement/", data).then(function (response) {
-                defer.resolve(response.data);
-            }, function (response) {
-                defer.reject(response);
+            function convert(r) {
+                var data = {
+                    id : r.id,
+                    name : r.name,
+                    description : r.description,
+                    required : r.required,
+                    pledged : r.pledged + r.offer,
+                    recieved : r.recieved,
+                    type : r.type
+                };
+                return data;
+            }
+            req.forEach(function(request) {
+                nr = convert(request)
+                console.log('pushing req data: ' + JSON.stringify(nr));
+                var defer = $q.defer();
+                $http.post("/rest/camp/" + campid + "/requirement/", nr).then(function (response) {
+                    defer.resolve(response.data);
+                    console.log(response);
+                }, function (response) {
+                    defer.reject(response);
+                });
             });
-            return defer.promise;
         }
     }
 });

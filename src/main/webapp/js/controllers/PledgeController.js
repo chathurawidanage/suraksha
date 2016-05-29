@@ -10,11 +10,13 @@ app.controller('pledgeController', function($scope, $mdDialog, $mdMedia, $locati
     console.log($scope.types);
 
     var markerClick = function (marker) {
+        console.log(marker);
         console.log(marker.camp.name);
         campService.requirements(marker.camp.id).then(function(data) {
             marker.camp.requirements =  data;
             $scope.camp = marker.camp;
         });
+        $scope.$parent.globalCtrl.openSlide();
     };
     //load all camps from server
     campService.all().then(function(data) {
@@ -30,8 +32,10 @@ app.controller('pledgeController', function($scope, $mdDialog, $mdMedia, $locati
                     icon : getMarkerIcon(camp)
                 }
             );
-            marker.camp = camp;
-            marker.addListener('click', markerClick);
+            marker.camp = data[i];
+            marker.addListener('click', function() {
+                markerClick(this);
+            });
             console.log(JSON.stringify(camp) + " loaded from server");
         }
         var criticalCamp = camps[0];
@@ -60,6 +64,7 @@ app.controller('pledgeController', function($scope, $mdDialog, $mdMedia, $locati
     }
     $scope.pledge = function(ev) {
         console.log(JSON.stringify($scope.camp.requirements));
+        campService.addRequirement($scope.camp.id, $scope.camp.requirements);
         $mdDialog.show({
                 controller: DialogController,
                 templateUrl: 'templates/thankyouDialog.html',
@@ -72,7 +77,6 @@ app.controller('pledgeController', function($scope, $mdDialog, $mdMedia, $locati
             }, function() {
                 $scope.status = 'You cancelled the dialog.';
             });
-        campService.addRequirement(camp.requirements);
         $scope.$parent.globalCtrl.closeSlide();
     };
     console.log("pledge controller running");

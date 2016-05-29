@@ -53,9 +53,10 @@ body {
     /*float: left;*/
     position: absolute;
     top: 90px;
+    right:0px;
     z-index: 99;
     text-align: right;
-    width: 100%;
+    width: 400px;
     height: 100%;
     /*background-color: rgba(0,0,0,0.5);*/
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+51,000000+100&0+37,0.75+100 */
