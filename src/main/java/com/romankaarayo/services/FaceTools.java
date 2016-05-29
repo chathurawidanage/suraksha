@@ -75,7 +75,7 @@ public final class FaceTools {
 			client.setFacesTemplateSize(NTemplateSize.LARGE);
 			client.setFacesConfidenceThreshold((byte)50);
 			client.setDatabaseConnectionToSQLite(AppConst.getDbLocation());
-			client.setMatchingThreshold(12);
+			client.setMatchingThreshold(60);
             /*
             100 	% 0
             10 	    % 12
