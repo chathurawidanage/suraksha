@@ -30,17 +30,17 @@ app.factory('campService', function ($http, $q) {
             });
             return defer.promise;
         },
-        addRequirement: function(campid, req) {
+        addRequirement: function (campid, req) {
             //{"id":3,"name":"Paracetamol","description":"Panadol","required":150,"pledged":100,"recieved":20,
             // "type":2,"$$hashKey":"object:26","offer":16}]
             var data = {
-                id : req.id,
-                name : req.name,
-                description : req.description,
-                required : req.required,
-                pledged : req.pledged + req.offer,
-                recieved : req.recieved,
-                type : req.type
+                id: req.id,
+                name: req.name,
+                description: req.description,
+                required: req.required,
+                pledged: req.pledged + req.offer,
+                recieved: req.recieved,
+                type: req.type
             };
 
             console.log('pushing req data: ' + JSON.stringify(data));
@@ -70,16 +70,22 @@ app.factory('personService', function ($http, $q) {
                 defer.reject(response);
             });
             return defer.promise;
+        },
+        getComments: function (personId) {
+            var defer = $q.defer();
+            $http.get("/rest/person/" + personId).then(function (response) {
+                defer.resolve(response.data);
+            }, function (response) {
+                defer.reject(response);
+            });
+            return defer.promise;
         }
     }
 })
 
 
-
-
-
 app.service('locatorService', ['$http', function ($http) {
-    this.results=[];
+    this.results = [];
 }]);
 
 app.service('reliefCenterService', ['$http', function ($http) {

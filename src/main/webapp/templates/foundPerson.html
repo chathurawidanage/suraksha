@@ -1,9 +1,33 @@
 <div ng-controller="imageResultController as ctrl">
     <div ng-if="ctrl.hasResult">
-        <img ng-src="{{ctrl.getImageUrl()}}" width="90%">
-        <h3 style="text-align: center">{{ctrl.person.firstName}}</h3>
+        <img ng-src="{{ctrl.getImageUrl()}}" width="100%">
+        <h2 style="text-align: center">{{ctrl.person.firstName}}</h2>
         <p>{{ctrl.person.firstName}} is safe at a disaster response camp.
             Contact camp agent +94771258452 for more details about him.</p>
+
+        <h3>Please help us to get to know him better.</h3>
+        <md-content>
+            <md-list>
+                <md-list-item class="md-3-line" ng-repeat="comment in ctrl.comments">
+                    <md-divider ng-if="$first"></md-divider>
+                    <div class="md-list-item-text">
+                        <p>{{comment.comment}}</p>
+                    </div>
+                    <md-button class="md-secondary md-accent md-raised md-hue-1">+1</md-button>
+                    <md-divider></md-divider>
+                </md-list-item>
+                <md-list-item class="md-3-line">
+                    <div class="md-list-item-text">
+                        <md-input-container>
+                            <label>Comments about {{ctrl.person.firstName}}'s health or other important that you know
+                                about him.</label>
+                            <input type="text" ng-model="ctrl.comment">
+                        </md-input-container>
+                    </div>
+                    <md-button class="md-secondary md-accent md-raised md-hue-2" ng-click="ctrl.postComment()">Post</md-button>
+                </md-list-item>
+            </md-list>
+        </md-content>
     </div>
     <div ng-if="!ctrl.hasResult">
         <h3 style="color:red">Unfortunately, the person you queried was not found.</h3>
