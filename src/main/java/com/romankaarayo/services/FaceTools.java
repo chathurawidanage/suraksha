@@ -4,6 +4,7 @@ package com.romankaarayo.services;
  */
 
 import com.neurotec.biometrics.NMatchingSpeed;
+import com.neurotec.biometrics.NTemplateSize;
 import com.neurotec.biometrics.client.NBiometricClient;
 import com.neurotec.licensing.NLicense;
 import com.romankaarayo.util.AppConst;
@@ -70,8 +71,11 @@ public final class FaceTools {
 
 			//NBiometricClient client = FaceTools.getInstance().getClient();
 //			client.setDatabaseConnectionToSQLite("test.db");
+
+			client.setFacesTemplateSize(NTemplateSize.LARGE);
+			client.setFacesConfidenceThreshold((byte)50);
 			client.setDatabaseConnectionToSQLite(AppConst.getDbLocation());
-			client.setMatchingThreshold(24);
+			client.setMatchingThreshold(12);
             /*
             100 	% 0
             10 	    % 12
